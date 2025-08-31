@@ -20,11 +20,11 @@ This web application serves as a digital medical assistant for brain tumor patie
 ## 📸 Application Screenshots
 
 ### Main Dashboard
-![Main Dashboard](static/image/website/image.png)
+![Main Dashboard](app/static/image/website/image.png)
 *Complete overview of patient dashboard with all core features*
 
 ### Application Pages
-![Application Pages Overview](static/image/website/image2.jpg)
+![Application Pages Overview](app/static/image/website/image2.jpg)
 *Collection of key application pages including analysis, records, and chat features*
 
 ## 🌐 Website Pages
