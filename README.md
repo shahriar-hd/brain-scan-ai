@@ -94,7 +94,7 @@ brain-tumor-assistant/
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/shahriar-hd/AideCare.git
+   git clone https://github.com/shahriar-hd/brain-scan-ai.git
    cd brain-scan-ai/app
    ```
 
