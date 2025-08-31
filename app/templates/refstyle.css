@@ -1,0 +1,348 @@
+:root {
+    --primary-color: #4285f4;
+    --secondary-color: #34a853;
+    --dark-color: #202124;
+    --light-color: #f8f9fa;
+    --accent-color: #ea4335;
+    --text-color: #3c4043;
+    --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --sidebar-width: 250px;
+}
+
+.dark-theme {
+    --primary-color: #8ab4f8;
+    --secondary-color: #81c995;
+    --dark-color: #f8f9fa;
+    --light-color: #202124;
+    --text-color: #e8eaed;
+    --card-shadow: 0 4px 6px rgba(255, 255, 255, 0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: var(--light-color);
+    color: var(--text-color);
+    transition: all 0.3s ease;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 5%;
+    background-color: var(--primary-color);
+    color: white;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.logo i {
+    font-size: 1.8rem;
+}
+
+.nav-links {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: var(--dark-color);
+}
+
+.theme-toggle {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.resources-container {
+    display: flex;
+    max-width: 1400px;
+    margin: 0 auto;
+    min-height: calc(100vh - 70px);
+}
+
+.sidebar {
+    width: var(--sidebar-width);
+    background-color: #f5f5f5;
+    padding: 2rem 1rem;
+    position: sticky;
+    top: 70px;
+    height: calc(100vh - 70px);
+    overflow-y: auto;
+    border-right: 1px solid #e0e0e0;
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+}
+
+.dark-theme .sidebar {
+    background-color: #333;
+    border-right: 1px solid #444;
+}
+
+.sidebar-header {
+    margin-bottom: 1.5rem;
+    font-size: 1.2rem;
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+.doc-links {
+    list-style: none;
+}
+
+.doc-links li {
+    margin-bottom: 0.5rem;
+}
+
+.doc-links a {
+    color: var(--text-color);
+    text-decoration: none;
+    display: block;
+    padding: 0.5rem;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.doc-links a:hover {
+    background-color: rgba(66, 133, 244, 0.1);
+    color: var(--primary-color);
+}
+
+.doc-links a.active {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.doc-content {
+    flex: 1;
+    padding: 2rem;
+    line-height: 1.6;
+}
+
+.doc-content h1, 
+.doc-content h2, 
+.doc-content h3, 
+.doc-content h4, 
+.doc-content h5, 
+.doc-content h6 {
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+}
+
+.doc-content h1 {
+    font-size: 2.2rem;
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 0.5rem;
+}
+
+.doc-content h2 {
+    font-size: 1.8rem;
+}
+
+.doc-content h3 {
+    font-size: 1.5rem;
+}
+
+.doc-content p {
+    margin-bottom: 1rem;
+}
+
+.doc-content ul, 
+.doc-content ol {
+    margin-left: 2rem;
+    margin-bottom: 1rem;
+}
+
+.doc-content code {
+    background-color: #f1f1f1;
+    padding: 0.2rem 0.4rem;
+    border-radius: 3px;
+    font-family: Consolas, Monaco, 'Andale Mono', monospace;
+    font-size: 0.9rem;
+}
+
+.dark-theme .doc-content code {
+    background-color: #444;
+}
+
+.doc-content pre {
+    background-color: #f1f1f1;
+    padding: 1rem;
+    border-radius: 4px;
+    overflow-x: auto;
+    margin-bottom: 1rem;
+}
+
+.dark-theme .doc-content pre {
+    background-color: #333;
+}
+
+.doc-content pre code {
+    background-color: transparent;
+    padding: 0;
+}
+
+.doc-content a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.doc-content a:hover {
+    text-decoration: underline;
+}
+
+.doc-content blockquote {
+    border-left: 4px solid var(--primary-color);
+    padding-left: 1rem;
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 1rem;
+    color: #666;
+}
+
+.dark-theme .doc-content blockquote {
+    color: #ccc;
+}
+
+.doc-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1rem;
+}
+
+.doc-content table th,
+.doc-content table td {
+    border: 1px solid #ddd;
+    padding: 0.5rem;
+}
+
+.dark-theme .doc-content table th,
+.dark-theme .doc-content table td {
+    border-color: #444;
+}
+
+.doc-content table th {
+    background-color: #f5f5f5;
+    font-weight: bold;
+}
+
+.dark-theme .doc-content table th {
+    background-color: #333;
+}
+
+.mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .resources-container {
+        flex-direction: column;
+    }
+    
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        top: 0;
+        max-height: 0;
+        overflow: hidden;
+        padding: 0;
+        transition: max-height 0.3s ease, padding 0.3s ease;
+    }
+    
+    .sidebar.open {
+        max-height: 500px;
+        padding: 1rem;
+    }
+    
+    .mobile-menu-btn {
+        display: block;
+    }
+    
+    .nav-links {
+        display: none;
+    }
+}
+
+/* Loading spinner */
+.loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+}
+
+.loader:after {
+    content: " ";
+    display: block;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    border: 6px solid var(--primary-color);
+    border-color: var(--primary-color) transparent var(--primary-color) transparent;
+    animation: loader 1.2s linear infinite;
+}
+
+@keyframes loader {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Back to top button */
+.back-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: var(--primary-color);
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 100;
+}
+
+.back-to-top.visible {
+    opacity: 1;
+}

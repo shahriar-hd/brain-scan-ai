@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment - BrainScan AI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="light-theme">
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo">
+            <img src="{{ url_for('static', filename='image/pic/Logo.png') }}" alt="BrainScan Logo">
+            <span>BrainScan AI</span>
+        </div>
+        <div class="nav-links">
+            <a href="{{ url_for('index') }}">Home</a>
+            <a href="{{ url_for('index', _anchor='mri-section') }}">Technology</a>
+            <a href="{{ url_for('resources') }}">References</a>
+            <a href="{{ url_for('about') }}">About</a>
+            <a href="{{ url_for('contact') }}">Contact</a>
+            <a href="{{ url_for('app_page') }}">Demo</a>
+        </div>
+        <div class="nav-buttons">
+            <button id="theme-toggle">
+                <i class="fas fa-moon"></i>
+            </button>
+            <a href="{{ url_for('login') }}"><button class="login-btn">Login</button></a>
+            <a href="{{ url_for('login', _anchor='signup') }}"><button class="signup-btn">Sign Up</button></a>
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Payment Container -->
+    <div class="payment-container">
+        <!-- Payment Header -->
+        <div class="payment-header">
+            <h1>Complete Your Payment</h1>
+            <p>You're just one step away from unlocking the full potential of BrainScan AI. Please review your plan details and complete payment information below.</p>
+        </div>
+
+        <!-- Main Content for Payment and Plan Details -->
+        <div class="payment-content">
+            <!-- Plan Summary -->
+            <div class="plan-summary" id="plan-summary">
+                <h2>Plan Summary</h2>
+                
+                <div class="plan-name" id="plan-name">Professional Plan</div>
+                
+                <div class="plan-details">
+                    <div class="plan-detail">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Up to 50 MRI scans per month</span>
+                    </div>
+                    <div class="plan-detail">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Advanced tumor detection & segmentation</span>
+                    </div>
+                    <div class="plan-detail">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Detailed analysis reports</span>
+                    </div>
+                    <div class="plan-detail">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Priority technical support</span>
+                    </div>
+                    <div class="plan-detail">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Integration with hospital systems</span>
+                    </div>
+                </div>
+                
+                <div class="price-tag" id="price-tag">$0 <small>/month</small></div>
+                
+                <div class="billing-cycle">
+                    <p>Billed monthly. Cancel anytime.</p>
+                </div>
+            </div>
+            
+            <!-- Payment Form Container -->
+            <div class="payment-form-container" id="payment-form-container">
+                <h2>Payment Information</h2>
+                
+                <div class="payment-options">
+                    <div class="payment-option active">
+                        <img src="{{ url_for('static', filename='image/pic/credit-card.jpg') }}" alt="Credit Card">
+                        <div>Credit Card</div>
+                    </div>
+                    <div class="payment-option">
+                        <img src="{{ url_for('static', filename='image/pic/PayPal.webp') }}" alt="PayPal">
+                        <div>PayPal</div>
+                    </div>
+                </div>
+                
+                <form id="payment-form">
+                    <div class="form-group">
+                        <label for="cardholder-name">Cardholder Name</label>
+                        <input type="text" id="cardholder-name" class="form-control" placeholder="John Smith" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="card-number">Card Number</label>
+                        <input type="text" id="card-number" class="form-control" placeholder="1234 5678 9012 3456" maxlength="19" required>
+                    </div>
+                    
+                    <div class="card-details">
+                        <div class="form-group">
+                            <label for="expiry-date">Expiry Date</label>
+                            <input type="text" id="expiry-date" class="form-control" placeholder="MM/YY" maxlength="5" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="cvv">CVV</label>
+                            <input type="text" id="cvv" class="form-control" placeholder="123" maxlength="3" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="billing-address">Billing Address</label>
+                        <input type="text" id="billing-address" class="form-control" placeholder="123 Main St, City, Country" required>
+                    </div>
+                    
+                    <button type="submit" class="payment-btn">Complete Payment</button>
+                    
+                    <div class="payment-secure">
+                        <i class="fas fa-lock"></i>
+                        <span>Secure payment processing. Your data is protected.</span>
+                    </div>
+                </form>
+            </div>
+            
+            <!-- Success Message (Hidden by Default) -->
+            <div class="success-message" id="success-message">
+                <i class="fas fa-check-circle success-icon"></i>
+                <h2>Payment Successful!</h2>
+                <p>Thank you for your payment. Your subscription has been activated successfully. You now have full access to all the features of your plan.</p>
+                <a href="{{ url_for('app_page', _anchor='profile') }}" class="profile-btn" data-section="profile">Go to Your Profile</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>BrainScan AI</h3>
+                <p>Advanced brain tumor detection powered by deep learning and artificial intelligence.</p>
+                <div class="social-icons">
+                    <a href="https://x.com/"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.linkedin.com/"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://github.com/shahriar-hd/brainapp"><i class="fab fa-github"></i></a>
+                    <a href="https://t.me"><i class="fab fa-telegram"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="{{ url_for('index') }}">Home</a></li>
+                    <li><a href="{{ url_for('index', _anchor='mri-section') }}">Technology</a></li>
+                    <li><a href="{{ url_for('index', _anchor='pricing') }}">Pricing</a></li>
+                    <li><a href="{{ url_for('about') }}">About Us</a></li>
+                    <li><a href="{{ url_for('contact') }}">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="{{ url_for('resources') }}">Documentation</a></li>
+                    <li><a href="{{ url_for('resources', _anchor='api-reference') }}">API Reference</a></li>
+                    <li><a href="{{ url_for('resources', _anchor='research-papers') }}">Research Papers</a></li>
+                    <li><a href="{{ url_for('resources', _anchor='privacy-policy') }}">Privacy Policy</a></li>
+                    <li><a href="{{ url_for('resources', _anchor='terms-of-service') }}">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact Us</h3>
+                <ul class="contact-info">
+                    <li><i class="fas fa-envelope"></i> info@brainscan.ai</li>
+                    <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                    <li><i class="fas fa-map-marker-alt"></i> 123 Innovation Dr, Tech City, TC 12345</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 BrainScan AI. All rights reserved.</p>
+        </div>
+    </footer>
+    <script src="{{ url_for('static', filename='js/payment.js') }}"></script>
+</body>
+</html> 

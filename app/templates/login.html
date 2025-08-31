@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login/Signup - BrainScan AI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="light-theme">
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo">
+            <img src="{{ url_for('static', filename='image/pic/Logo.png') }}" alt="BrainScan Logo">
+            <span>BrainScan AI</span>
+        </div>
+        <div class="nav-links">
+            <a href="{{ url_for('index') }}">Home</a>
+            <a href="{{ url_for('index', _anchor='mri-section') }}">Technology</a>
+            <a href="{{ url_for('resources') }}">References</a>
+            <a href="{{ url_for('about') }}">About</a>
+            <a href="{{ url_for('contact') }}">Contact</a>
+            <a href="{{ url_for('app_page') }}">Demo</a>
+        </div>
+        <div class="nav-buttons">
+            <button id="theme-toggle">
+                <i class="fas fa-moon"></i>
+            </button>
+            <a href="{{ url_for('login') }}"><button class="login-btn">Login</button></a>
+            <a href="{{ url_for('login', _anchor='signup') }}"><button class="signup-btn">Sign Up</button></a>
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Auth Container -->
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="auth-tabs">
+                <div class="auth-tab active" id="login-tab">Login</div>
+                <div class="auth-tab" id="signup-tab">Sign Up</div>
+            </div>
+            <div class="auth-content">
+                <!-- Login Form Container -->
+                <div class="auth-form-container active" id="login-form">
+                    <div class="auth-header">
+                        <h2>Welcome Back</h2>
+                        <p>Please login to access your account</p>
+                    </div>
+                    <form id="login-form-element">
+                        <div class="form-group">
+                            <label for="login-username">Email address</label>
+                            <input type="text" id="login-username" class="form-control" placeholder="Enter your Email address" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="login-password">Password</label>
+                            <input type="password" id="login-password" class="form-control" placeholder="Enter your password" required>
+                        </div>
+                        <div class="error-message" id="login-error">Invalid username or password. Please try again.</div>
+                        <button type="submit" class="auth-btn">Login</button>
+                    </form>
+                    <div class="auth-links">
+                        <a href="{{ url_for('login', _anchor='forgot-password') }}" id="forgot-password-link" data-section="forgot-password">Forgot Password?</a>
+                    </div>
+                    <div class="social-auth">
+                        <p>Or login with</p>
+                        <div class="social-buttons">
+                            <div class="social-button google">
+                                <i class="fab fa-google"></i>
+                            </div>
+                            <div class="social-button facebook">
+                                <i class="fab fa-facebook-f"></i>
+                            </div>
+                            <div class="social-button twitter">
+                                <i class="fab fa-twitter"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Sign Up Form Container -->
+                <div class="auth-form-container" id="signup-form">
+                    <div class="auth-header">
+                        <h2>Create an Account</h2>
+                        <p>Join the BrainScan AI community</p>
+                    </div>
+                    <form id="signup-form-element">
+                        <div class="form-group">
+                            <label>Select Your Role</label>
+                            <div class="role-options">
+                                <div class="role-option" data-value="patient">
+                                    <input type="radio" id="role-patient" name="role" value="patient" required>
+                                    <div class="role-icon">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                    <div class="role-name">Patient</div>
+                                    <div class="role-desc">Access your MRI scans and reports</div>
+                                </div>
+                                <div class="role-option" data-value="doctor">
+                                    <input type="radio" id="role-doctor" name="role" value="doctor">
+                                    <div class="role-icon">
+                                        <i class="fas fa-user-md"></i>
+                                    </div>
+                                    <div class="role-name">Doctor</div>
+                                    <div class="role-desc">Manage patients and analyze scans</div>
+                                </div>
+                                <div class="role-option" data-value="organization">
+                                    <input type="radio" id="role-organization" name="role" value="organization">
+                                    <div class="role-icon">
+                                        <i class="fas fa-hospital"></i>
+                                    </div>
+                                    <div class="role-name">Organization</div>
+                                    <div class="role-desc">Manage multiple doctors and patients</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="signup-fullname">Full Name</label>
+                                <input type="text" id="signup-fullname" class="form-control" placeholder="Enter your full name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="signup-email">Email Address</label>
+                                <input type="email" id="signup-email" class="form-control" placeholder="Enter your email" required>
+                            </div>
+                        </div>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="signup-password">Create a Password</label>
+                                <input type="password" id="signup-password" class="form-control" placeholder="Create a password" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="signup-confirm-password">Confirm Password</label>
+                                <input type="password" id="signup-confirm-password" class="form-control" placeholder="Confirm your password" required>
+                            </div>
+                        </div>
+                        <div class="error-message" id="signup-error">Passwords don't match or another error occurred.</div>
+                        <button type="submit" class="auth-btn">Create Account</button>
+                    </form>
+                    <div class="social-auth">
+                        <p>Or sign up with</p>
+                        <div class="social-buttons">
+                            <div class="social-button google">
+                                <i class="fab fa-google"></i>
+                            </div>
+                            <div class="social-button facebook">
+                                <i class="fab fa-facebook-f"></i>
+                            </div>
+                            <div class="social-button twitter">
+                                <i class="fab fa-twitter"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Forgot Password -->
+                <div class="auth-form-container" id="forgot-password-form">
+                    <div class="auth-header">
+                        <h2>Forgot Password</h2>
+                        <p>Please enter your Email to reset your password</p>
+                    </div>
+                    <form id="forgot-password-form-element">
+                        <div class="form-group">
+                            <label for="forgot-email">Email</label>
+                            <input type="text" id="forgot-username" class="form-control" placeholder="Enter your email" required>
+                        </div>
+                        <div class="error-message" id="forgot-error">The reset Email send. Please check your inbox message.</div>
+                        <button type="submit" class="auth-btn">Reset password</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>BrainScan AI</h3>
+                <p>Advanced brain tumor detection powered by deep learning and artificial intelligence.</p>
+                <div class="social-icons">
+                    <a href="https://x.com/"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.linkedin.com/"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://github.com/shahriar-hd/brainapp"><i class="fab fa-github"></i></a>
+                    <a href="https://t.me"><i class="fab fa-telegram"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="{{ url_for('index') }}">Home</a></li>
+                    <li><a href="{{ url_for('index', _anchor='mri-section') }}">Technology</a></li>
+                    <li><a href="{{ url_for('index', _anchor='pricing') }}">Pricing</a></li>
+                    <li><a href="{{ url_for('about') }}">About Us</a></li>
+                    <li><a href="{{ url_for('contact') }}">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="{{ url_for('resources') }}">Documentation</a></li>
+                    <li><a href="{{ url_for('resources', _anchor='api-reference') }}">API Reference</a></li>
+                    <li><a href="{{ url_for('resources', _anchor='research-papers') }}">Research Papers</a></li>
+                    <li><a href="{{ url_for('resources', _anchor='privacy-policy') }}">Privacy Policy</a></li>
+                    <li><a href="{{ url_for('resources', _anchor='terms-of-service') }}">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact Us</h3>
+                <ul class="contact-info">
+                    <li><i class="fas fa-envelope"></i><a href="mailto:csa@kut.ac.ir">csa@kut.ac.ir</a></li>
+                    <li><i class="fas fa-phone"></i> +98 (083) 3830-5001</li>
+                    <li><i class="fas fa-map-marker-alt"></i>Kermanshah University of Technology, Imam Khomaini highway, Kermanshah, Iran</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 BrainScan AI. All rights reserved.</p>
+        </div>
+    </footer>
+    <script src="{{ url_for('static', filename='js/login.js') }}"></script>
+</body>
+</html> 

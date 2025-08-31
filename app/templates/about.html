@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - BrainScan AI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="light-theme">
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo">
+            <img src="{{ url_for('static', filename='image/pic/Logo.png') }}" alt="BrainScan Logo">
+            <span>BrainScan AI</span>
+        </div>
+        <div class="nav-links">
+            <a href="{{ url_for('index') }}">Home</a>
+            <a href="{{ url_for('index', _anchor='mri-section') }}">Technology</a>
+            <a href="{{ url_for('resources') }}">References</a>
+            <a href="{{ url_for('about') }}" class="active">About</a>
+            <a href="{{ url_for('contact') }}">Contact</a>
+            <a href="{{ url_for('app_page') }}">Demo</a>
+        </div>
+        <div class="nav-buttons">
+            <button id="theme-toggle">
+                <i class="fas fa-moon"></i>
+            </button>
+            <a href="{{ url_for('login') }}"><button class="login-btn">Login</button></a>
+            <a href="{{ url_for('login', _anchor='signup') }}"><button class="signup-btn">Sign Up</button></a>
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- About Container -->
+    <div class="about-container">
+        <!-- About Hero Section -->
+        <div class="about-hero">
+            <h1>About BrainScan AI</h1>
+            <p>We are a team of passionate researchers, developers, and healthcare professionals dedicated to revolutionizing brain tumor detection through artificial intelligence. Our mission is to make accurate diagnosis accessible to everyone, everywhere.</p>
+        </div>
+
+        <!-- Company Information -->
+        <div class="company-info">
+            <div class="info-card">
+                <h2>Our Story</h2>
+                <p>BrainScan AI was founded in 2024 by a group of neuroscience researchers and AI specialists who recognized the need for more accurate and efficient brain tumor detection methods. What began as a research project quickly evolved into a mission to transform healthcare diagnostics globally.</p>
+                <p>Today, we've grown to a team of 30+ professionals spanning multiple disciplines, united by the goal of saving lives through technology. Our solutions are currently used in over 50 hospitals worldwide, helping thousands of patients receive faster and more accurate diagnoses.</p>
+            </div>
+            <div class="info-card">
+                <h2>Contact Information</h2>
+                <p>We're always open to new partnerships, research collaborations, or just answering your questions about our technology.</p>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div>
+                            <h4>Phone</h4>
+                            <p>+98 (083) 3830-5001</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div>
+                            <h4>Email</h4>
+                            <p>csa@kut.ac.ir</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div>
+                            <h4>Address</h4>
+                            <p>Kermanshah University of Technology, Imam Khomaini highway, Kermanshah, Iran</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="map-container">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3294.995833128207!2d47.0964263!3d34.325125500000006!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ffaee5c67f06bfb%3A0x5e5a180fbbac058c!2sKermanshah%20University%20of%20Technology!5e0!3m2!1sen!2s!4v1745876270564!5m2!1sen!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </div>
+
+        <!-- Team Section -->
+        <div class="team-section">
+            <h2>Meet Our Team</h2>
+            <div class="team-grid">
+                <div class="team-member">
+                    <img src="{{ url_for('static', filename='image/developers/Sepehr.jpg') }}" alt="Sepehr" class="member-image">
+                    <div class="member-info">
+                        <h3>Sepehr</h3>
+                        <div class="member-role">CEO & Co-Founder</div>
+                        <p>Sepehr serves as the CEO and Co-founder, spearheading the company's vision and strategic direction. With a strong entrepreneurial spirit, he is responsible for overseeing overall business operations, fostering key partnerships, and ensuring that the company's mission aligns with market needs and stakeholder expectations. His leadership is crucial in navigating the complexities of the healthcare technology landscape, driving innovation, and securing the resources necessary for growth and successful project implementation.</p>
+                        <div class="member-social">
+                            <a href="https://www.linkedin.com/" class="social-link"><i class="fab fa-linkedin"></i></a>
+                            <a href="https://x.com/" class="social-link"><i class="fab fa-twitter"></i></a>
+                            <a href="mailto://sepehrebrahimi82@gmail.com" class="social-link"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <img src="{{ url_for('static', filename='image/developers/Amir.jpg') }}" alt="AmirHoussein" class="member-image">
+                    <div class="member-info">
+                        <h3>AmirHoussein</h3>
+                        <div class="member-role">CTO & Co-Founder</div>
+                        <p>As the CTO and Co-founder, Amir leads the technological development and innovation for the platform. He is responsible for designing the system architecture, overseeing the development team, and ensuring the technical feasibility and robustness of the brain tumor detection solution. His expertise is vital in selecting appropriate technologies, implementing scalable infrastructure, and translating complex research findings into practical and efficient software applications that power the core of the website's diagnostic capabilities.</p>
+                        <div class="member-social">
+                            <a href="https://www.linkedin.com/" class="social-link"><i class="fab fa-linkedin"></i></a>
+                            <a href="https://github.com" class="social-link"><i class="fab fa-github"></i></a>
+                            <a href="mailto://amk555hhh@gmail.com" class="social-link"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <img src="{{ url_for('static', filename='image/developers/Ramtin.jpg') }}" alt="Ramtin" class="member-image">
+                    <div class="member-info">
+                        <h3>Ramtin</h3>
+                        <div class="member-role">Lead Researcher</div>
+                        <p>Ramtin is the Lead Researcher, focusing on the scientific backbone of the brain tumor detection system. His role involves developing and refining the machine learning models, conducting extensive data analysis, and staying abreast of the latest advancements in medical imaging and artificial intelligence. He is responsible for ensuring the accuracy and reliability of the diagnostic algorithms, translating cutting-edge research into actionable insights, and driving the continuous improvement of the detection methodology.</p>
+                        <div class="member-social">
+                            <a href="https://www.linkedin.com/" class="social-link"><i class="fab fa-linkedin"></i></a>
+                            <a href="https://www.researchgate.net/" class="social-link"><i class="fab fa-researchgate"></i></a>
+                            <a href="mailto://amiritin123321@gmail.com" class="social-link"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <img src="{{ url_for('static', filename='image/developers/Shahriar.jpg') }}" alt="Shahriar" class="member-image">
+                    <div class="member-info">
+                        <h3>Shahriar</h3>
+                        <div class="member-role">Lead Developer</div>
+                        <p>Shahriar functions as the Lead Developer, guiding the implementation and maintenance of the software components. He leads the development team in writing clean, efficient, and well-documented code for both the frontend and backend systems, including the REST API. His responsibilities encompass ensuring smooth integration of various modules, optimizing application performance, and troubleshooting technical issues, thereby playing a critical role in bringing the diagnostic tools and user interface to life.</p>
+                        <div class="member-social">
+                            <a href="https://www.linkedin.com/" class="social-link"><i class="fab fa-linkedin"></i></a>
+                            <a href="https://github.com" class="social-link"><i class="fab fa-github"></i></a>
+                            <a href="mailto://shahriar.hd@outlook.com" class="social-link"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mission Section -->
+        <div class="mission-section">
+            <h2>Our Mission & Technology</h2>
+            <div class="mission-content">
+                <p>At BrainScan AI, we're driven by a simple yet powerful mission: to make early and accurate brain tumor detection accessible to everyone, regardless of geographic or economic constraints. Brain tumors affect millions worldwide, with over 300,000 new cases diagnosed annually. Early detection is critical, often meaning the difference between life and death.</p>
+                
+                <p>Our technology leverages three powerful deep learning architectures:</p>
+                
+                <p><strong>1. Vanilla UNet:</strong> Our baseline model provides exceptional segmentation capabilities through its contracting and expansive paths, maintaining high-resolution features through skip connections.</p>
+                
+                <p><strong>2. UNet with ResNeXt50 Backbone:</strong> By incorporating the ResNeXt architecture as our encoder, we achieve improved feature extraction with better handling of complex patterns in MRI images.</p>
+                
+                <p><strong>3. Feature Pyramid Network (FPN):</strong> This architecture helps us detect tumors at different scales, ensuring that both small and large abnormalities are accurately identified.</p>
+                
+                <p>What sets us apart is our integrated LLM (Large Language Model) system that translates complex model outputs into clear, actionable insights for healthcare providers. This combination of advanced segmentation and interpretability makes our solution not just a detection tool, but a comprehensive diagnostic assistant.</p>
+                
+                <p>Our research is ongoing, with continuous improvements in model accuracy, reduction in false positives, and expansion to different types of brain abnormalities. We collaborate with leading research institutions and hospitals to ensure our technology remains at the cutting edge while addressing real clinical needs.</p>
+                
+                <p>By combining AI excellence with medical expertise, we aim to transform the standard of care for brain tumor patients worldwide.</p>
+            </div>
+        </div>
+
+        <!-- Support Section -->
+         <div class="support-section" id="support-section">
+            <h2>Support Us</h2>
+            <div class="support-content">
+                <p>We deeply appreciate your interest in supporting our work! Your contributions, no matter the size, play a vital role in helping us maintain and improve our services, ensuring we can continue to provide valuable resources to our community. If you'd like to support us financially, you can send contributions to the following cryptocurrency address. Every bit helps us invest in better infrastructure, develop new features, and keep our platform accessible to everyone. Thank you for considering supporting our mission!</p>
+
+                <p><strong>1. EVM address:</strong> <a href="ethereum://0x7eeaA91B2406685e03312C5Ecd7594C448c9C279">0x7eeaA91B2406685e03312C5Ecd7594C448c9C279</a></p>
+
+                <p><strong>2. ENS address:</strong> <a href="ethereum://shahriarhd.eth">shahriarhd.eth</a> <a href="ethereum://shahriarhd.base.eth">shahriarhd.base.eth</a></p>
+
+                <p><strong>3. Solona address:</strong> Solana Address</p>
+
+                <div class="qrcode-image">
+                    <img src="{{ url_for('static', filename='image/pic/qrcode.png') }}" alt="Ethereum Address">
+                </div>
+            </div>
+         </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>BrainScan AI</h3>
+                <p>Advanced brain tumor detection powered by deep learning and artificial intelligence.</p>
+                <div class="social-icons">
+                    <a href="https://x.com/"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.linkedin.com/"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://github.com/shahriar-hd/brainapp"><i class="fab fa-github"></i></a>
+                    <a href="https://t.me"><i class="fab fa-telegram"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="{{ url_for('index') }}">Home</a></li>
+                    <li><a href="{{ url_for('index', _anchor='mri-section') }}">Technology</a></li>
+                    <li><a href="{{ url_for('index', _anchor='pricing') }}">Pricing</a></li>
+                    <li><a href="{{ url_for('about') }}">About Us</a></li>
+                    <li><a href="{{ url_for('contact') }}">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="{{ url_for('resources') }}">Documentation</a></li>
+                    <li><a href="{{ url_for('resources', _anchor='api-reference') }}">API Reference</a></li>
+                    <li><a href="{{ url_for('resources', _anchor='research-papers') }}">Research Papers</a></li>
+                    <li><a href="{{ url_for('resources', _anchor='privacy-policy') }}">Privacy Policy</a></li>
+                    <li><a href="{{ url_for('resources', _anchor='terms-of-service') }}">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact Us</h3>
+                <ul class="contact-info">
+                    <li><i class="fas fa-envelope"></i><a href="mailto:csa@kut.ac.ir">csa@kut.ac.ir</a></li>
+                    <li><i class="fas fa-phone"></i> +98 (083) 3830-5001</li>
+                    <li><i class="fas fa-map-marker-alt"></i>Kermanshah University of Technology, Imam Khomaini highway, Kermanshah, Iran</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 BrainScan AI. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/about.js') }}"></script>
+</body>
+</html> 

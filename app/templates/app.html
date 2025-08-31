@@ -1,0 +1,1622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BrainScan AI - Application Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/app_styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="light-theme">
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo">
+            <img src="{{ url_for('static', filename='image/pic/Logo.png') }}" alt="BrainScan Logo">
+            <span>BrainScan AI</span>
+        </div>
+        <div class="nav-links">
+            <a href="{{ url_for('index') }}">Home</a>
+            <a href="{{ url_for('index', _anchor='mri-section') }}">Technology</a>
+            <a href="{{ url_for('resources') }}">References</a>
+            <a href="{{ url_for('about') }}">About</a>
+            <a href="{{ url_for('contact') }}">Contact</a>
+            <a href="{{ url_for('app_page') }}" class="active">Demo</a>
+        </div>
+        <div class="nav-buttons">
+            <button id="theme-toggle">
+                <i class="fas fa-moon"></i>
+            </button>
+            <div class="profile-dropdown">
+                <div class="profile-photo" id="user-profile-img">
+                    <img id="user-profile-img" src="" alt="User Profile" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <i class="fas fa-user profile-icon" style="display: none;"></i>
+                </div>
+                <div class="dropdown-content">
+                    <a href="#" class="dropdown-item" data-section="profile">
+                        <i class="fas fa-user"></i>
+                        <span>Profile Settings</span>
+                    </a>
+                    <a href="#" class="dropdown-item" data-section="appointment">
+                        <i class="fas fa-calendar-check"></i>
+                        <span>Medical Appointments</span>
+                    </a>
+                    <a href="#" class="dropdown-item" data-section="dashboard">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span>Dashboard</span>
+                    </a>
+                    <a href="#" class="dropdown-item" data-section="chat">
+                        <i class="fas fa-comment-medical"></i>
+                        <span>AI Chatbot</span>
+                    </a>
+                    <a href="{{ url_for('index') }}" class="dropdown-item">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Logout</span>
+                    </a>
+                </div>
+            </div>
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main App Container -->
+    <div class="app-container">
+        <!-- Section Selector -->
+        <div class="section-selector">
+            <div class="section-option active" data-section="dashboard">
+                <i class="fas fa-tachometer-alt"></i>
+                <span>Dashboard</span>
+            </div>
+            <div class="section-option" data-section="appointment">
+                <i class="fas fa-calendar-check"></i>
+                <span>Appointments</span>
+            </div>
+            <div class="section-option" data-section="scans">
+                <i class="fas fa-brain"></i>
+                <span>Scans</span>
+            </div>
+            <div class="section-option" data-section="records">
+                <i class="fas fa-file-medical"></i>
+                <span>Medical Records</span>
+            </div>
+            <div class="section-option" data-section="chat">
+                <i class="fas fa-comment-medical"></i>
+                <span>AI Chatbot</span>
+            </div>
+        </div>
+
+        <!-- Dashboard Section -->
+        <div id="dashboard" class="content-section active">
+            <div class="dashboard-grid">
+                <!-- Personal Information Card -->
+                <div class="dashboard-card info-card">
+                    <h3><i class="fas fa-user-circle"></i> Personal Information</h3>
+                    <div class="personal-info">
+                        <div class="info-item">
+                            <span class="info-label">Name:</span>
+                            <span class="info-value" id="user-full-name">John Doe</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Patient ID:</span>
+                            <span class="info-value" id="user-pid">P-10042389</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Age:</span>
+                            <span class="info-value" id="user-age">42</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Blood Type:</span>
+                            <span class="info-value" id="user-blood-type">O+</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Contact:</span>
+                            <span class="info-value" id="user-phone-num">+1 (555) 123-4567</span>
+                        </div>
+                        <a href="#" class="btn-small" data-section="profile">
+                            <i class="fas fa-edit"></i> Edit Profile
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Doctor Information Card -->
+                <div class="dashboard-card doctor-card">
+                    <h3><i class="fas fa-user-md"></i> Your Doctor</h3>
+                    <div class="doctor-info">
+                        <div class="doctor-profile">
+                            <div class="doctor-image">
+                                <img src="{{ url_for('static', filename='image/doctor/6.png') }}" alt="Doctor">
+                            </div>
+                            <div class="doctor-details">
+                                <h4>Dr. Sarah Johnson</h4>
+                                <p>Neurologist</p>
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                    <span>4.5</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="doctor-contact">
+                            <div class="contact-item">
+                                <i class="fas fa-envelope"></i>
+                                <span>s.johnson@brainscan.ai</span>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-phone"></i>
+                                <span>+1 (555) 987-6543</span>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-hospital"></i>
+                                <span>NeuroCare Medical Center</span>
+                            </div>
+                        </div>
+                        <div class="doctor-actions">
+                            <a href="#" class="btn-small" data-section="appointment">
+                                <i class="fas fa-calendar-plus"></i> Schedule Appointment
+                            </a>
+                            <a href="#" class="btn-small">
+                                <i class="fas fa-comment-medical"></i> Message
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Access Card -->
+                <div class="dashboard-card quick-access-card">
+                    <h3><i class="fas fa-bolt"></i> Quick Access</h3>
+                    <div class="quick-access-grid">
+                        <a href="{{ url_for('index') }}" class="quick-access-item">
+                            <i class="fas fa-home"></i>
+                            <span>Home</span>
+                        </a>
+                        <a href="#" class="quick-access-item" data-section="scans">
+                            <i class="fas fa-upload"></i>
+                            <span>Upload Scan</span>
+                        </a>
+                        <a href="#" class="quick-access-item" data-section="appointment">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>Appointments</span>
+                        </a>
+                        <a href="#" class="quick-access-item" data-section="records">
+                            <i class="fas fa-clipboard-list"></i>
+                            <span>Records</span>
+                        </a>
+                        <a href="#" class="quick-access-item" data-section="chat">
+                            <i class="fas fa-robot"></i>
+                            <span>AI Chat</span>
+                        </a>
+                        <a href="{{ url_for('contact') }}" class="quick-access-item">
+                            <i class="fas fa-headset"></i>
+                            <span>Support</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Vital Signs Card -->
+                <div class="dashboard-card vitals-card">
+                    <h3><i class="fas fa-heartbeat"></i> Vital Signs</h3>
+                    <div class="vitals-grid">
+                        <div class="vital-item">
+                            <div class="vital-icon">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                            <div class="vital-info">
+                                <span class="vital-label">Heart Rate</span>
+                                <span class="vital-value">72 bpm</span>
+                                <span class="vital-status normal">Normal</span>
+                            </div>
+                        </div>
+                        <div class="vital-item">
+                            <div class="vital-icon">
+                                <i class="fas fa-lungs"></i>
+                            </div>
+                            <div class="vital-info">
+                                <span class="vital-label">Respiration</span>
+                                <span class="vital-value">16 rpm</span>
+                                <span class="vital-status normal">Normal</span>
+                            </div>
+                        </div>
+                        <div class="vital-item">
+                            <div class="vital-icon">
+                                <i class="fas fa-thermometer-half"></i>
+                            </div>
+                            <div class="vital-info">
+                                <span class="vital-label">Temperature</span>
+                                <span class="vital-value">98.6 °F</span>
+                                <span class="vital-status normal">Normal</span>
+                            </div>
+                        </div>
+                        <div class="vital-item">
+                            <div class="vital-icon">
+                                <i class="fas fa-tint"></i>
+                            </div>
+                            <div class="vital-info">
+                                <span class="vital-label">Blood Pressure</span>
+                                <span class="vital-value">120/80 mmHg</span>
+                                <span class="vital-status normal">Normal</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="vitals-footer">
+                        <span>Last Updated: Today, 08:30 AM</span>
+                        <a href="#" class="btn-small">
+                            <i class="fas fa-sync-alt"></i> Update
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Health Suggestions Card -->
+                <div class="dashboard-card suggestions-card">
+                    <h3><i class="fas fa-lightbulb"></i> Health Suggestions</h3>
+                    <div class="suggestions-list">
+                        <div class="suggestion-item">
+                            <div class="suggestion-icon">
+                                <i class="fas fa-walking"></i>
+                            </div>
+                            <div class="suggestion-content">
+                                <h4>Daily Exercise</h4>
+                                <p>Aim for at least 30 minutes of moderate exercise daily to improve cardiovascular health.</p>
+                            </div>
+                        </div>
+                        <div class="suggestion-item">
+                            <div class="suggestion-icon">
+                                <i class="fas fa-carrot"></i>
+                            </div>
+                            <div class="suggestion-content">
+                                <h4>Balanced Diet</h4>
+                                <p>Include more fruits, vegetables, and omega-3 rich foods in your diet for better brain health.</p>
+                            </div>
+                        </div>
+                        <div class="suggestion-item">
+                            <div class="suggestion-icon">
+                                <i class="fas fa-moon"></i>
+                            </div>
+                            <div class="suggestion-content">
+                                <h4>Adequate Sleep</h4>
+                                <p>Aim for 7-8 hours of quality sleep each night to support cognitive function.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Appointment Reminders Card -->
+                <div class="dashboard-card reminders-card">
+                    <h3><i class="fas fa-bell"></i> Upcoming Appointments</h3>
+                    <div class="reminders-list">
+                        <div class="reminder-item">
+                            <div class="reminder-date">
+                                <div class="date-month">Jun</div>
+                                <div class="date-day">15</div>
+                            </div>
+                            <div class="reminder-content">
+                                <h4>MRI Follow-up</h4>
+                                <p><i class="fas fa-clock"></i> 10:30 AM - 11:30 AM</p>
+                                <p><i class="fas fa-user-md"></i> Dr. Sarah Johnson</p>
+                                <p><i class="fas fa-hospital"></i> NeuroCare Medical Center</p>
+                            </div>
+                            <div class="reminder-actions">
+                                <button class="btn-icon" title="Reschedule">
+                                    <i class="fas fa-calendar-alt"></i>
+                                </button>
+                                <button class="btn-icon" title="Cancel">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="reminder-item">
+                            <div class="reminder-date">
+                                <div class="date-month">Jun</div>
+                                <div class="date-day">22</div>
+                            </div>
+                            <div class="reminder-content">
+                                <h4>Consultation</h4>
+                                <p><i class="fas fa-clock"></i> 2:00 PM - 3:00 PM</p>
+                                <p><i class="fas fa-user-md"></i> Dr. Michael Brown</p>
+                                <p><i class="fas fa-hospital"></i> Virtual Meeting</p>
+                            </div>
+                            <div class="reminder-actions">
+                                <button class="btn-icon" title="Reschedule">
+                                    <i class="fas fa-calendar-alt"></i>
+                                </button>
+                                <button class="btn-icon" title="Cancel">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="reminders-footer">
+                        <a href="#" class="btn-small" data-section="appointment">
+                            <i class="fas fa-calendar-plus"></i> Schedule New
+                        </a>
+                        <a href="#" class="btn-small" data-section="appointment">
+                            <i class="fas fa-eye"></i> View All
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Appointments Section -->
+        <div id="appointment" class="content-section">
+            <div class="section-header">
+                <h2>Medical Appointments</h2>
+                <p>Schedule, view, and manage your medical appointments with our team of specialists.</p>
+            </div>
+            
+            <div class="appointments-container">
+                <!-- Doctors List -->
+                <div class="appointments-card doctors-list-card">
+                    <h3><i class="fas fa-user-md"></i> Available Specialists</h3>
+                    <div class="doctors-filter">
+                        <input type="text" placeholder="Search doctors..." class="form-control">
+                        <select class="form-control">
+                            <option value="">All Specialties</option>
+                            <option value="neurology">Neurology</option>
+                            <option value="neurosurgery">Neurosurgery</option>
+                            <option value="oncology">Oncology</option>
+                            <option value="radiology">Radiology</option>
+                        </select>
+                    </div>
+                    <div class="doctors-grid">
+                        <div class="doctor-info">
+                            <div class="doctor-grid-profile">
+                                <div class="doctor-profile">
+                                    <div class="doctor-image">
+                                        <img src="{{ url_for('static', filename='image/doctor/1.png') }}" alt="Doctor">
+                                    </div>
+                                    <div class="doctor-details">
+                                        <h4>Dr. Marcia J Hinton</h4>
+                                        <p>Neurologist</p>
+                                        <div class="rating">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star-half-alt"></i>
+                                            <span>4.5</span>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            
+                                <div class="doctor-actions">
+                                    <a href="#" class="btn-small" data-section="appointment">
+                                        <i class="fas fa-calendar-plus"></i> Schedule Appointment
+                                    </a>
+                                </div>
+                            
+                            </div>
+                            <div class="doctor-grid-profile">
+                                <div class="doctor-profile">
+                                    <div class="doctor-image">
+                                        <img src="{{ url_for('static', filename='image/doctor/2.png') }}" alt="Doctor">
+                                    </div>
+                                    <div class="doctor-details">
+                                        <h4>Dr. Ricky E Rodriguez</h4>
+                                        <p>Radiologist</p>
+                                        <div class="rating">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star-half-alt"></i>
+                                            <span>4.5</span>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            
+                                <div class="doctor-actions">
+                                    <a href="#" class="btn-small" data-section="appointment">
+                                        <i class="fas fa-calendar-plus"></i> Schedule Appointment
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="doctor-grid-profile">
+                                <div class="doctor-profile">
+                                    <div class="doctor-image">
+                                        <img src="{{ url_for('static', filename='image/doctor/3.png') }}" alt="Doctor">
+                                    </div>
+                                    <div class="doctor-details">
+                                        <h4>Dr. Katherine R Gallagher</h4>
+                                        <p>Neurologist</p>
+                                        <div class="rating">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star-half-alt"></i>
+                                            <span>4.5</span>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            
+                                <div class="doctor-actions">
+                                    <a href="#" class="btn-small" data-section="appointment">
+                                        <i class="fas fa-calendar-plus"></i> Schedule Appointment
+                                    </a>
+                                </div>
+                            
+                            </div>
+                            <div class="doctor-grid-profile">
+                                <div class="doctor-profile">
+                                    <div class="doctor-image">
+                                        <img src="{{ url_for('static', filename='image/doctor/7.png') }}" alt="Doctor">
+                                    </div>
+                                    <div class="doctor-details">
+                                        <h4>Dr. Brad S Riley</h4>
+                                        <p>Oncologist</p>
+                                        <div class="rating">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star-half-alt"></i>
+                                            <span>4.5</span>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            
+                                <div class="doctor-actions">
+                                    <a href="#" class="btn-small" data-section="appointment">
+                                        <i class="fas fa-calendar-plus"></i> Schedule Appointment
+                                    </a>
+                                </div>
+                            
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+                
+                <!-- Appointment Booking Calendar -->
+                <div class="appointments-card booking-card">
+                    <h3><i class="fas fa-calendar-alt"></i> Schedule Appointment</h3>
+                    <div class="booking-details">
+                        <div class="selected-doctor">
+                            <div class="doctor-mini-profile">
+                                <div class="doctor-image-big">
+                                    <img src="{{ url_for('static', filename='image/doctor/1.png') }}" alt="Doctor">
+                                </div>
+                                <div>
+                                    <h4>Dr. Marcia J Hinton</h4>
+                                    <p>Neurologist</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="booking-calendar">
+                            <div class="calendar-header">
+                                <input type="date" id="birth-date" class="form-control">
+                            </div> 
+                        </div>
+                        
+                        <div class="time-slots">
+                            <h4>Available Time Slots - June 15</h4>
+                            <select class="form-control">
+                                <option>9:00 AM</option>
+                                <option>9:30 AM</option>
+                                <option>10:00 AM</option>
+                                <option>10:30 AM</option>
+                                <option>11:00 AM</option>
+                                <option>11:30 AM</option>
+                                <option>12:00 PM</option>
+                                <option>12:30 PM</option>
+                                <option>2:00 PM</option>
+                                <option>2:30 PM</option>
+                                <option>3:00 PM</option>
+                                <option>3:30 PM</option>    
+                            </select>
+                        </div>
+                        
+                        <div class="appointment-type">
+                            <h4>Appointment Type</h4>
+                            <div class="type-options">
+                                <label class="type-option">
+                                    <div class="option-content">
+                                        <input type="radio" name="appointment-type" checked>
+                                        <i class="fas fa-hospital"></i>
+                                        <span>In-person</span>
+                                    </div>
+                                </label>
+                                <label class="type-option">
+                                    <div class="option-content">
+                                        <input type="radio" name="appointment-type" checked>
+                                        <i class="fas fa-video"></i>
+                                        <span>Video Call</span>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="appointment-reason">
+                            <h4>Reason for Visit</h4>
+                            <select class="form-control">
+                                <option value="consultation">Initial Consultation</option>
+                                <option value="followup">Follow-up Visit</option>
+                                <option value="scan">MRI Scan Review</option>
+                                <option value="second-opinion">Second Opinion</option>
+                                <option value="other">Other (Please specify)</option>
+                            </select>
+                            <textarea class="form-control" placeholder="Additional notes for the doctor..." rows="3"></textarea>
+                        </div>
+                        
+                        <a href="#" class="btn-small" data-section="appointment">
+                            Confirm
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Upcoming Appointments List -->
+                <div class="appointments-card upcoming-card">
+                    <h3><i class="fas fa-clock"></i> Your Appointments</h3>
+                    <div class="tabs">
+                        <button class="tab-btn active" data-tab="upcoming">Upcoming</button>
+                        <button class="tab-btn" data-tab="past">Past</button>
+                    </div>
+                    
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="upcoming">
+                            <div class="appointment-list">
+                                <div class="reminders-list">
+                        <div class="reminder-item">
+                            <div class="reminder-date">
+                                <div class="date-month">Jun</div>
+                                <div class="date-day">15</div>
+                            </div>
+                            <div class="reminder-content">
+                                <h4>MRI Follow-up</h4>
+                                <p><i class="fas fa-clock"></i> 10:30 AM - 11:30 AM</p>
+                                <p><i class="fas fa-user-md"></i> Dr. Sarah Johnson</p>
+                                <p><i class="fas fa-hospital"></i> NeuroCare Medical Center</p>
+                            </div>
+                            <div class="reminder-actions">
+                                <button class="btn-icon" title="Reschedule">
+                                    <i class="fas fa-calendar-alt"></i>
+                                </button>
+                                <button class="btn-icon" title="Cancel">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="reminder-item">
+                            <div class="reminder-date">
+                                <div class="date-month">Jun</div>
+                                <div class="date-day">22</div>
+                            </div>
+                            <div class="reminder-content">
+                                <h4>Consultation</h4>
+                                <p><i class="fas fa-clock"></i> 2:00 PM - 3:00 PM</p>
+                                <p><i class="fas fa-user-md"></i> Dr. Michael Brown</p>
+                                <p><i class="fas fa-hospital"></i> Virtual Meeting</p>
+                            </div>
+                            <div class="reminder-actions">
+                                <button class="btn-icon" title="Reschedule">
+                                    <i class="fas fa-calendar-alt"></i>
+                                </button>
+                                <button class="btn-icon" title="Cancel">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                            </div>
+                        </div>
+                        
+                        <div class="tab-pane" id="past">
+                            <div class="appointment-list">
+                                <div class="reminders-list">
+                        <div class="reminder-item">
+                            <div class="reminder-date">
+                                <div class="date-month">Dec</div>
+                                <div class="date-day">25</div>
+                            </div>
+                            <div class="reminder-content">
+                                <h4>Check-up</h4>
+                                <p><i class="fas fa-clock"></i> 9:30 AM - 10:30 AM</p>
+                                <p><i class="fas fa-user-md"></i> Dr. Sarah Johnson</p>
+                                <p><i class="fas fa-hospital"></i> NeuroCare Medical Center</p>
+                            </div>
+                            <div class="reminder-actions">
+                                <button class="btn-icon" title="Reschedule">
+                                    <i class="fas fa-calendar-alt"></i>
+                                </button>
+                                <button class="btn-icon" title="Cancel">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="reminder-item">
+                            <div class="reminder-date">
+                                <div class="date-month">Nov</div>
+                                <div class="date-day">10</div>
+                            </div>
+                            <div class="reminder-content">
+                                <h4>MRI Scan</h4>
+                                <p><i class="fas fa-clock"></i> 1:00 PM - 2:00 PM</p>
+                                <p><i class="fas fa-user-md"></i> Dr. Ricky E Rodriguez</p>
+                                <p><i class="fas fa-hospital"></i> NeuroCare Radiology Scan Center</p>
+                            </div>
+                            <div class="reminder-actions">
+                                <button class="btn-icon" title="Reschedule">
+                                    <i class="fas fa-calendar-alt"></i>
+                                </button>
+                                <button class="btn-icon" title="Cancel">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Medical Records Section -->
+        <div id="records" class="content-section">
+            <div class="section-header">
+                <h2>Medical Records</h2>
+                <p>View your comprehensive medical history, diagnostic results, and treatment information.</p>
+            </div>
+            
+            <div class="records-container">
+                <!-- Medical History Chart -->
+                <div class="records-card history-card">
+                    <h3><i class="fas fa-chart-line"></i> Patient History</h3>
+                    <div class="chart-container">
+                        <canvas id="medicalHistoryChart"></canvas>
+                    </div>
+                    <div class="history-legend">
+                        <div class="legend-item">
+                            <span class="legend-color symptoms"></span>
+                            <span>Reported Symptoms</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-color treatments"></span>
+                            <span>Treatments</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-color scans"></span>
+                            <span>MRI Scans</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Scan Results -->
+                <div class="records-card results-card">
+                    <h3><i class="fas fa-brain"></i> Recent Scan Results</h3>
+                    <div class="scan-results">
+                        <div class="scan-preview">
+                            <div class="segmented-scan">
+                                <img src="{{ url_for('static', filename='image/input/scan.jpg') }}" alt="MRI Scan">
+                            </div>
+                            
+                            <div class="scan-overlay">
+                                <div class="overlay-item" style="top: 45%; left: 55%;" title="Detected abnormality">
+                                    <i class="fas fa-plus"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="scan-info">
+                            <div class="scan-details">
+                                <h4>MRI Scan - May 10, 2023</h4>
+                                <div class="detail-item">
+                                    <span class="detail-label">Type:</span>
+                                    <span class="detail-value">T1-weighted</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">Machine:</span>
+                                    <span class="detail-value">Siemens Magnetom Prisma 3T</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">Radiologist:</span>
+                                    <span class="detail-value">Dr. Robert Wilson</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">AI Analysis:</span>
+                                    <span class="detail-value">Processed by BrainScan AI v2.3</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">Status:</span>
+                                    <span class="detail-value status-tag needs-attention">Needs Attention</span>
+                                </div>
+                            </div>
+                            
+                            <div class="scan-diagnosis">
+                                <h4>Diagnosis</h4>
+                                <p><strong>AI Assessment:</strong> Small meningioma detected in the right frontal lobe, measuring approximately 2.3cm x 1.8cm.</p>
+                                <p><strong>Radiologist's Note:</strong> Confirming the presence of a well-defined mass consistent with meningioma. No surrounding edema observed. Recommend follow-up in 3 months.</p>
+                            </div>
+                            
+                            <div class="scan-actions">
+                                <button class="btn-small">
+                                    <i class="fas fa-download"></i> Download Report
+                                </button>
+                                <button class="btn-small">
+                                    <i class="fas fa-share-alt"></i> Share with Doctor
+                                </button>
+                                <button class="btn-small">
+                                    <i class="fas fa-print"></i> Print
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Notes Section -->
+                <div class="records-card notes-card">
+                    <h3><i class="fas fa-clipboard-list"></i> Doctor's Notes</h3>
+                    <div class="notes-container">
+                        <div class="note-item">
+                            <div class="note-header">
+                                <h4>Follow-up Consultation - May 20, 2023</h4>
+                                <div class="note-meta">
+                                    <span><i class="fas fa-user-md"></i> Dr. Sarah Johnson</span>
+                                    <span><i class="fas fa-tag"></i> Neurology</span>
+                                </div>
+                            </div>
+                            <div class="note-content">
+                                <p>Patient presents for follow-up regarding meningioma discovered on MRI dated May 10, 2023. The tumor is small (2.3cm x 1.8cm) and appears to be a typical benign meningioma based on imaging characteristics.</p>
+                                <p>No concerning neurological symptoms at this time. Patient reports occasional headaches that respond well to over-the-counter analgesics.</p>
+                                <p>Given the size and location, we will proceed with watchful waiting rather than immediate surgical intervention. Recommended follow-up MRI in 3 months to monitor for any growth.</p>
+                                <p>Patient educated on signs and symptoms that would warrant immediate medical attention (severe headaches, vision changes, new-onset seizures, etc.).</p>
+                                <h5>Treatment Plan:</h5>
+                                <ul>
+                                    <li>Monitor with follow-up MRI in 3 months</li>
+                                    <li>Continue current medications</li>
+                                    <li>Return sooner if new or worsening symptoms develop</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="note-item collapsed">
+                            <div class="note-header">
+                                <h4>Initial Consultation - April 15, 2023</h4>
+                                <div class="note-meta">
+                                    <span><i class="fas fa-user-md"></i> Dr. Sarah Johnson</span>
+                                    <span><i class="fas fa-tag"></i> Neurology</span>
+                                </div>
+                                <button class="expand-btn">
+                                    <i class="fas fa-chevron-down"></i>
+                                </button>
+                            </div>
+                            <div class="note-content">
+                                <p>Patient presents with recurring headaches over the past 3 months...</p>
+                            </div>
+                        </div>
+                        
+                        <div class="note-item collapsed">
+                            <div class="note-header">
+                                <h4>Radiology Report - May 10, 2023</h4>
+                                <div class="note-meta">
+                                    <span><i class="fas fa-user-md"></i> Dr. Robert Wilson</span>
+                                    <span><i class="fas fa-tag"></i> Radiology</span>
+                                </div>
+                                <button class="expand-btn">
+                                    <i class="fas fa-chevron-down"></i>
+                                </button>
+                            </div>
+                            <div class="note-content">
+                                <p>MRI findings indicate presence of a well-defined extra-axial mass...</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="add-note">
+                        <h4>Patient Notes</h4>
+                        <textarea class="form-control" placeholder="Add your own notes about your symptoms, questions for your doctor, etc." rows="3"></textarea>
+                        <a href="#" class="btn-small" data-section="appointment">
+                            Save Notes
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scans Section -->
+        <div id="scans" class="content-section">
+            <div class="section-header">
+                <h2>Brain Scans</h2>
+                <p>Upload, analyze, and track your MRI brain scans for tumor detection and monitoring.</p>
+            </div>
+            
+            <div class="scans-container">
+                <!-- Scan Upload -->
+                <div class="scans-card upload-card">
+                    <h3><i class="fas fa-upload"></i> Upload New Scan</h3>
+                    <div class="upload-area">
+                        <div class="upload-dropzone" id="scan-dropzone">
+                            <div class="dropzone-content">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <h4>Drag & Drop MRI Files</h4>
+                                <p>or</p>
+                                <label class="upload-btn">
+                                    <span><i class="fas fa-folder-open"></i> Browse Files</span>
+                                    <input type="file" id="scan-upload-file" accept="image/*, .dcm">
+                                </label>
+                                <p class="upload-info">Supports TIF, JPG, PNG (max 16MB per file)</p>
+                            </div>
+                        </div>
+                        
+                        <div class="scan-details">
+                            <div class="form-group">
+                                <label>Scan Date</label>
+                                <input type="date" class="form-control" value="2023-06-10" id="scan-date-input">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Scan Type</label>
+                                <select class="form-control" id="scan-type-selector">
+                                    <option value="T1-weighted">T1-weighted</option>
+                                    <option value="T2-weighted">T2-weighted</option>
+                                    <option value="FLAIR">FLAIR</option>
+                                    <option value="Diffusion-weighted">Diffusion-weighted</option>
+                                    <option value="T1 with contrast">T1 with contrast</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Facility</label>
+                                <input type="text" class="form-control" id="scan-facility-input" placeholder="Where was the scan taken?" value="NeuroCare Medical Center">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Symptoms & Notes</label>
+                                <textarea class="form-control" id="new-scan-notes" placeholder="Describe any symptoms or additional information..." rows="3"></textarea>
+                            </div>
+
+                            <div class="error-message" id="new-upload-error">Failed to upload, please try again.</div>
+
+                            <button class="btn-small" id="scan-upload-button">
+                                <i class="fas fa-upload"></i>
+                                Upload
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Scan History -->
+                <div class="scans-card history-card">
+                    <h3><i class="fas fa-history"></i> Scan History</h3>
+                    <div class="scan-filters">
+                        <div class="filter-group">
+                            <label>Sort by:</label>
+                            <select class="form-control">
+                                <option>Date (newest first)</option>
+                                <option>Date (oldest first)</option>
+                                <option>Status</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label>Filter:</label>
+                            <select class="form-control">
+                                <option>All scans</option>
+                                <option>With abnormalities</option>
+                                <option>Normal scans</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="scan-history-list" id="scan-history-list">
+    
+                    </div>
+                </div>
+                
+                <!-- AI Diagnosis -->
+                <div class="scans-card diagnosis-card">
+                    <h3><i class="fas fa-robot"></i> AI & Medical Diagnosis</h3>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="ai-diagnosis">
+                            <div class="selected-scan">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Profile Section -->
+        <div id="profile" class="content-section">
+            <div class="section-header">
+                <h2>Profile Settings</h2>
+                <p>Manage your personal information, preferences, and account settings.</p>
+            </div>
+            
+            <div class="profile-container">
+                <div class="profile-card">
+                    <div class="profile-photo-container">
+                        <div class="profile-photo-large" id="profile-photo-large">
+
+                        </div>
+                        <label class="upload-btn">
+                            <i class="fas fa-camera"></i> Change Photo
+                            <input type="file" id="profile-photo-update" accept="image/*" style="display: none;">
+                        </label>
+                        
+                    </div>
+                    
+                    <div class="profile-form">
+                        <div class="form-section">
+                            <h3>Personal Information</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>First Name</label>
+                                    <input type="text" class="form-control" value="John" id="user-first-name">
+                                </div>
+                                <div class="form-group">
+                                    <label>Last Name</label>
+                                    <input type="text" class="form-control" value="Doe" id="user-last-name">
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Date of Birth</label>
+                                    <input type="date" class="form-control" value="1981-04-15" id="user-date-birth">
+                                </div>
+                                <div class="form-group">
+                                    <label>Gender</label>
+                                    <select class="form-control" id="user-gender">
+                                        <option>Male</option>
+                                        <option>Female</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Blood Type</label>
+                                    <select class="form-control" id="user-blood-tp">
+                                        <option>O+</option>
+                                        <option>O-</option>
+                                        <option>A+</option>
+                                        <option>A-</option>
+                                        <option>B+</option>
+                                        <option>B-</option>
+                                        <option>AB+</option>
+                                        <option>AB-</option>
+                                        <option>Unknown</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Height (cm)</label>
+                                    <input type="number" class="form-control" value="178" id="user-height">
+                                </div>
+                                <div class="form-group">
+                                    <label>Weight (kg)</label>
+                                    <input type="number" class="form-control" value="75" id="user-weight">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-section">
+                            <h3>Contact Information</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Email Address</label>
+                                    <input type="email" class="form-control" value="john.doe@example.com" id="user-email">
+                                </div>
+                                <div class="form-group">
+                                    <label>Phone Number</label>
+                                    <input type="tel" class="form-control" value="+1 (555) 123-4567" id="user-phone-number">
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Address</label>
+                                    <input type="text" class="form-control" value="123 Main Street" id="user-address">
+                                </div>
+                                <div class="form-group">
+                                    <label>City</label>
+                                    <input type="text" class="form-control" value="Springfield" id="user-city">
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>State/Province</label>
+                                    <input type="text" class="form-control" value="IL" id="user-state-province">
+                                </div>
+                                <div class="form-group">
+                                    <label>Postal Code</label>
+                                    <input type="text" class="form-control" value="62704" id="user-postal-code">
+                                </div>
+                                <div class="form-group">
+                                    <label>Country</label>
+                                    <select class="form-control" id="user-country">
+                                        <option value="Afghanistan">Afghanistan</option>
+                                        <option value="Åland Islands">Åland Islands</option>
+                                        <option value="Albania">Albania</option>
+                                        <option value="Algeria">Algeria</option>
+                                        <option value="American Samoa">American Samoa</option>
+                                        <option value="Andorra">Andorra</option>
+                                        <option value="Angola">Angola</option>
+                                        <option value="Anguilla">Anguilla</option>
+                                        <option value="Antarctica">Antarctica</option>
+                                        <option value="Antigua and Barbuda">Antigua and Barbuda</option>
+                                        <option value="Argentina">Argentina</option>
+                                        <option value="Armenia">Armenia</option>
+                                        <option value="Aruba">Aruba</option>
+                                        <option value="Australia">Australia</option>
+                                        <option value="Austria">Austria</option>
+                                        <option value="Azerbaijan">Azerbaijan</option>
+                                        <option value="Bahamas">Bahamas</option>
+                                        <option value="Bahrain">Bahrain</option>
+                                        <option value="Bangladesh">Bangladesh</option>
+                                        <option value="Barbados">Barbados</option>
+                                        <option value="Belarus">Belarus</option>
+                                        <option value="Belgium">Belgium</option>
+                                        <option value="Belize">Belize</option>
+                                        <option value="Benin">Benin</option>
+                                        <option value="Bermuda">Bermuda</option>
+                                        <option value="Bhutan">Bhutan</option>
+                                        <option value="Bolivia">Bolivia</option>
+                                        <option value="Bosnia and Herzegovina">Bosnia and Herzegovina</option>
+                                        <option value="Botswana">Botswana</option>
+                                        <option value="Bouvet Island">Bouvet Island</option>
+                                        <option value="Brazil">Brazil</option>
+                                        <option value="British Indian Ocean Territory">British Indian Ocean Territory</option>
+                                        <option value="Brunei Darussalam">Brunei Darussalam</option>
+                                        <option value="Bulgaria">Bulgaria</option>
+                                        <option value="Burkina Faso">Burkina Faso</option>
+                                        <option value="Burundi">Burundi</option>
+                                        <option value="Cambodia">Cambodia</option>
+                                        <option value="Cameroon">Cameroon</option>
+                                        <option value="Canada">Canada</option>
+                                        <option value="Cape Verde">Cape Verde</option>
+                                        <option value="Cayman Islands">Cayman Islands</option>
+                                        <option value="Central African Republic">Central African Republic</option>
+                                        <option value="Chad">Chad</option>
+                                        <option value="Chile">Chile</option>
+                                        <option value="China">China</option>
+                                        <option value="Christmas Island">Christmas Island</option>
+                                        <option value="Cocos (Keeling) Islands">Cocos (Keeling) Islands</option>
+                                        <option value="Colombia">Colombia</option>
+                                        <option value="Comoros">Comoros</option>
+                                        <option value="Congo">Congo</option>
+                                        <option value="Congo, The Democratic Republic of The">Congo, The Democratic Republic of The</option>
+                                        <option value="Cook Islands">Cook Islands</option>
+                                        <option value="Costa Rica">Costa Rica</option>
+                                        <option value="Cote D'ivoire">Cote D'ivoire</option>
+                                        <option value="Croatia">Croatia</option>
+                                        <option value="Cuba">Cuba</option>
+                                        <option value="Cyprus">Cyprus</option>
+                                        <option value="Czech Republic">Czech Republic</option>
+                                        <option value="Denmark">Denmark</option>
+                                        <option value="Djibouti">Djibouti</option>
+                                        <option value="Dominica">Dominica</option>
+                                        <option value="Dominican Republic">Dominican Republic</option>
+                                        <option value="Ecuador">Ecuador</option>
+                                        <option value="Egypt">Egypt</option>
+                                        <option value="El Salvador">El Salvador</option>
+                                        <option value="Equatorial Guinea">Equatorial Guinea</option>
+                                        <option value="Eritrea">Eritrea</option>
+                                        <option value="Estonia">Estonia</option>
+                                        <option value="Ethiopia">Ethiopia</option>
+                                        <option value="Falkland Islands (Malvinas)">Falkland Islands (Malvinas)</option>
+                                        <option value="Faroe Islands">Faroe Islands</option>
+                                        <option value="Fiji">Fiji</option>
+                                        <option value="Finland">Finland</option>
+                                        <option value="France">France</option>
+                                        <option value="French Guiana">French Guiana</option>
+                                        <option value="French Polynesia">French Polynesia</option>
+                                        <option value="French Southern Territories">French Southern Territories</option>
+                                        <option value="Gabon">Gabon</option>
+                                        <option value="Gambia">Gambia</option>
+                                        <option value="Georgia">Georgia</option>
+                                        <option value="Germany">Germany</option>
+                                        <option value="Ghana">Ghana</option>
+                                        <option value="Gibraltar">Gibraltar</option>
+                                        <option value="Greece">Greece</option>
+                                        <option value="Greenland">Greenland</option>
+                                        <option value="Grenada">Grenada</option>
+                                        <option value="Guadeloupe">Guadeloupe</option>
+                                        <option value="Guam">Guam</option>
+                                        <option value="Guatemala">Guatemala</option>
+                                        <option value="Guernsey">Guernsey</option>
+                                        <option value="Guinea">Guinea</option>
+                                        <option value="Guinea-bissau">Guinea-bissau</option>
+                                        <option value="Guyana">Guyana</option>
+                                        <option value="Haiti">Haiti</option>
+                                        <option value="Heard Island and Mcdonald Islands">Heard Island and Mcdonald Islands</option>
+                                        <option value="Holy See (Vatican City State)">Holy See (Vatican City State)</option>
+                                        <option value="Honduras">Honduras</option>
+                                        <option value="Hong Kong">Hong Kong</option>
+                                        <option value="Hungary">Hungary</option>
+                                        <option value="Iceland">Iceland</option>
+                                        <option value="India">India</option>
+                                        <option value="Indonesia">Indonesia</option>
+                                        <option value="Iran">Iran</option>
+                                        <option value="Iraq">Iraq</option>
+                                        <option value="Ireland">Ireland</option>
+                                        <option value="Isle of Man">Isle of Man</option>
+                                        <option value="Israel">Israel</option>
+                                        <option value="Italy">Italy</option>
+                                        <option value="Jamaica">Jamaica</option>
+                                        <option value="Japan">Japan</option>
+                                        <option value="Jersey">Jersey</option>
+                                        <option value="Jordan">Jordan</option>
+                                        <option value="Kazakhstan">Kazakhstan</option>
+                                        <option value="Kenya">Kenya</option>
+                                        <option value="Kiribati">Kiribati</option>
+                                        <option value="Korea, Democratic People's Republic of">Korea, Democratic People's Republic of</option>
+                                        <option value="Korea, Republic of">Korea, Republic of</option>
+                                        <option value="Kuwait">Kuwait</option>
+                                        <option value="Kyrgyzstan">Kyrgyzstan</option>
+                                        <option value="Lao People's Democratic Republic">Lao People's Democratic Republic</option>
+                                        <option value="Latvia">Latvia</option>
+                                        <option value="Lebanon">Lebanon</option>
+                                        <option value="Lesotho">Lesotho</option>
+                                        <option value="Liberia">Liberia</option>
+                                        <option value="Libyan Arab Jamahiriya">Libyan Arab Jamahiriya</option>
+                                        <option value="Liechtenstein">Liechtenstein</option>
+                                        <option value="Lithuania">Lithuania</option>
+                                        <option value="Luxembourg">Luxembourg</option>
+                                        <option value="Macao">Macao</option>
+                                        <option value="Macedonia, The Former Yugoslav Republic of">Macedonia, The Former Yugoslav Republic of</option>
+                                        <option value="Madagascar">Madagascar</option>
+                                        <option value="Malawi">Malawi</option>
+                                        <option value="Malaysia">Malaysia</option>
+                                        <option value="Maldives">Maldives</option>
+                                        <option value="Mali">Mali</option>
+                                        <option value="Malta">Malta</option>
+                                        <option value="Marshall Islands">Marshall Islands</option>
+                                        <option value="Martinique">Martinique</option>
+                                        <option value="Mauritania">Mauritania</option>
+                                        <option value="Mauritius">Mauritius</option>
+                                        <option value="Mayotte">Mayotte</option>
+                                        <option value="Mexico">Mexico</option>
+                                        <option value="Micronesia, Federated States of">Micronesia, Federated States of</option>
+                                        <option value="Moldova, Republic of">Moldova, Republic of</option>
+                                        <option value="Monaco">Monaco</option>
+                                        <option value="Mongolia">Mongolia</option>
+                                        <option value="Montenegro">Montenegro</option>
+                                        <option value="Montserrat">Montserrat</option>
+                                        <option value="Morocco">Morocco</option>
+                                        <option value="Mozambique">Mozambique</option>
+                                        <option value="Myanmar">Myanmar</option>
+                                        <option value="Namibia">Namibia</option>
+                                        <option value="Nauru">Nauru</option>
+                                        <option value="Nepal">Nepal</option>
+                                        <option value="Netherlands">Netherlands</option>
+                                        <option value="Netherlands Antilles">Netherlands Antilles</option>
+                                        <option value="New Caledonia">New Caledonia</option>
+                                        <option value="New Zealand">New Zealand</option>
+                                        <option value="Nicaragua">Nicaragua</option>
+                                        <option value="Niger">Niger</option>
+                                        <option value="Nigeria">Nigeria</option>
+                                        <option value="Niue">Niue</option>
+                                        <option value="Norfolk Island">Norfolk Island</option>
+                                        <option value="Northern Mariana Islands">Northern Mariana Islands</option>
+                                        <option value="Norway">Norway</option>
+                                        <option value="Oman">Oman</option>
+                                        <option value="Pakistan">Pakistan</option>
+                                        <option value="Palau">Palau</option>
+                                        <option value="Palestinian Territory, Occupied">Palestinian Territory, Occupied</option>
+                                        <option value="Panama">Panama</option>
+                                        <option value="Papua New Guinea">Papua New Guinea</option>
+                                        <option value="Paraguay">Paraguay</option>
+                                        <option value="Peru">Peru</option>
+                                        <option value="Philippines">Philippines</option>
+                                        <option value="Pitcairn">Pitcairn</option>
+                                        <option value="Poland">Poland</option>
+                                        <option value="Portugal">Portugal</option>
+                                        <option value="Puerto Rico">Puerto Rico</option>
+                                        <option value="Qatar">Qatar</option>
+                                        <option value="Reunion">Reunion</option>
+                                        <option value="Romania">Romania</option>
+                                        <option value="Russian Federation">Russian Federation</option>
+                                        <option value="Rwanda">Rwanda</option>
+                                        <option value="Saint Helena">Saint Helena</option>
+                                        <option value="Saint Kitts and Nevis">Saint Kitts and Nevis</option>
+                                        <option value="Saint Lucia">Saint Lucia</option>
+                                        <option value="Saint Pierre and Miquelon">Saint Pierre and Miquelon</option>
+                                        <option value="Saint Vincent and The Grenadines">Saint Vincent and The Grenadines</option>
+                                        <option value="Samoa">Samoa</option>
+                                        <option value="San Marino">San Marino</option>
+                                        <option value="Sao Tome and Principe">Sao Tome and Principe</option>
+                                        <option value="Saudi Arabia">Saudi Arabia</option>
+                                        <option value="Senegal">Senegal</option>
+                                        <option value="Serbia">Serbia</option>
+                                        <option value="Seychelles">Seychelles</option>
+                                        <option value="Sierra Leone">Sierra Leone</option>
+                                        <option value="Singapore">Singapore</option>
+                                        <option value="Slovakia">Slovakia</option>
+                                        <option value="Slovenia">Slovenia</option>
+                                        <option value="Solomon Islands">Solomon Islands</option>
+                                        <option value="Somalia">Somalia</option>
+                                        <option value="South Africa">South Africa</option>
+                                        <option value="South Georgia and The South Sandwich Islands">South Georgia and The South Sandwich Islands</option>
+                                        <option value="Spain">Spain</option>
+                                        <option value="Sri Lanka">Sri Lanka</option>
+                                        <option value="Sudan">Sudan</option>
+                                        <option value="Suriname">Suriname</option>
+                                        <option value="Svalbard and Jan Mayen">Svalbard and Jan Mayen</option>
+                                        <option value="Swaziland">Swaziland</option>
+                                        <option value="Sweden">Sweden</option>
+                                        <option value="Switzerland">Switzerland</option>
+                                        <option value="Syrian Arab Republic">Syrian Arab Republic</option>
+                                        <option value="Taiwan">Taiwan</option>
+                                        <option value="Tajikistan">Tajikistan</option>
+                                        <option value="Tanzania, United Republic of">Tanzania, United Republic of</option>
+                                        <option value="Thailand">Thailand</option>
+                                        <option value="Timor-leste">Timor-leste</option>
+                                        <option value="Togo">Togo</option>
+                                        <option value="Tokelau">Tokelau</option>
+                                        <option value="Tonga">Tonga</option>
+                                        <option value="Trinidad and Tobago">Trinidad and Tobago</option>
+                                        <option value="Tunisia">Tunisia</option>
+                                        <option value="Turkey">Turkey</option>
+                                        <option value="Turkmenistan">Turkmenistan</option>
+                                        <option value="Turks and Caicos Islands">Turks and Caicos Islands</option>
+                                        <option value="Tuvalu">Tuvalu</option>
+                                        <option value="Uganda">Uganda</option>
+                                        <option value="Ukraine">Ukraine</option>
+                                        <option value="United Arab Emirates">United Arab Emirates</option>
+                                        <option value="United Kingdom">United Kingdom</option>
+                                        <option value="United States">United States</option>
+                                        <option value="United States Minor Outlying Islands">United States Minor Outlying Islands</option>
+                                        <option value="Uruguay">Uruguay</option>
+                                        <option value="Uzbekistan">Uzbekistan</option>
+                                        <option value="Vanuatu">Vanuatu</option>
+                                        <option value="Venezuela">Venezuela</option>
+                                        <option value="Viet Nam">Viet Nam</option>
+                                        <option value="Virgin Islands, British">Virgin Islands, British</option>
+                                        <option value="Virgin Islands, U.S.">Virgin Islands, U.S.</option>
+                                        <option value="Wallis and Futuna">Wallis and Futuna</option>
+                                        <option value="Western Sahara">Western Sahara</option>
+                                        <option value="Yemen">Yemen</option>
+                                        <option value="Zambia">Zambia</option>
+                                        <option value="Zimbabwe">Zimbabwe</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-section">
+                            <h3>Emergency Contact</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Name</label>
+                                    <input type="text" class="form-control" value="Bob Doe" id="user-emergency-contact-name">
+                                </div>
+                                <div class="form-group">
+                                    <label>Relationship</label>
+                                    <input type="text" class="form-control" value="Spouse" id="user-emergency-contact-relationship">
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Phone Number</label>
+                                    <input type="tel" class="form-control" value="+1 (555) 987-6543" id="user-emergency-contact-phone">
+                                </div>
+                                <div class="form-group">
+                                    <label>Email</label>
+                                    <input type="email" class="form-control" value="jane.doe@example.com" id="user-emergency-contact-email">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-section">
+                            <h3>Medical Information</h3>
+                            <div class="form-group">
+                                <label>Allergies</label>
+                                <textarea class="form-control" rows="2" id="user-allergies">Penicillin, Peanuts</textarea>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Current Medications</label>
+                                <textarea class="form-control" rows="2" id="user-current-medications">Lisinopril 10mg daily, Multivitamin</textarea>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Medical Conditions</label>
+                                <textarea class="form-control" rows="2" id="user-medical-conditions">Hypertension, Migraine</textarea>
+                            </div>
+                        </div>
+                        
+                        <div class="form-section">
+                            <h3>Account Settings</h3>
+                            <div class="form-group">
+                                <label>Email Notifications</label>
+                                <div class="checkbox-group">
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" checked> Appointment Reminders
+                                    </label>
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" checked> Scan Results
+                                    </label>
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" checked> Doctor Messages
+                                    </label>
+                                    <label class="checkbox-item">
+                                        <input type="checkbox"> Marketing Communications
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>SMS Notifications</label>
+                                <div class="checkbox-group">
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" checked> Appointment Reminders
+                                    </label>
+                                    <label class="checkbox-item">
+                                        <input type="checkbox"> Scan Results Available
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="error-message" id="profile-save-error">Failed to update, please try again.</div>
+                        <div class="form-actions">
+                            <button class="btn-small" id="save-profile-change">Save</button>
+                            <button class="btn-small" href="#">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="security-card">
+                    <h3>Security Settings</h3>
+                    <div class="security-options">
+                        <div class="security-option">
+                            <div class="option-header">
+                                <h4>Change Password</h4>
+                            </div>
+                            <div class="option-content collapsed">
+                                <div class="form-group">
+                                    <label>Current Password</label>
+                                    <input type="password" class="form-control" id="user-old-password">
+                                </div>
+                                <div class="form-group">
+                                    <label>New Password</label>
+                                    <input type="password" class="form-control" id="user-new-password-1">
+                                </div>
+                                <div class="form-group">
+                                    <label>Confirm New Password</label>
+                                    <input type="password" class="form-control" id="user-new-password-2">
+                                </div>
+                                <div class="error-message" id="update-password-error">Failed to update, please try again.</div>
+                                <button class="btn-small" id="update-password-btn">Update Password</button>
+                            </div>
+                        </div>
+                        
+                        <div class="security-option">
+                            <div class="option-header">
+                                <h4>Two-Factor Authentication</h4>
+                            </div>
+                            <div class="option-content collapsed">
+                                <p>Enhance your account security by enabling two-factor authentication.</p>
+                                <div class="toggle-switch">
+                                    <input type="checkbox" id="2fa-toggle">
+                                    <label for="2fa-toggle"></label>
+                                    <span>Two-factor authentication is disabled</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="security-option">
+                            <div class="option-header">
+                                <h4>Connected Devices</h4>
+                            </div>
+                            <div class="option-content collapsed">
+                                <p>Review and manage devices that are currently logged into your account.</p>
+                                <div class="devices-list">
+                                    <div class="device-item">
+                                        <div class="device-info">
+                                            <i class="fas fa-laptop"></i>
+                                            <div>
+                                                <h5>MacBook Pro</h5>
+                                                <p>Last active: Today, 10:23 AM</p>
+                                            </div>
+                                        </div>
+                                        <button class="btn-small btn-danger">Sign Out</button>
+                                    </div>
+                                    <div class="device-item">
+                                        <div class="device-info">
+                                            <i class="fas fa-mobile-alt"></i>
+                                            <div>
+                                                <h5>iPhone 13</h5>
+                                                <p>Last active: Today, 9:15 AM</p>
+                                            </div>
+                                        </div>
+                                        <button class="btn-small btn-danger">Sign Out</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chat Bot Section -->
+        <div id="chat" class="content-section">
+            <div class="section-header">
+                <h2>AI Medical Assistant</h2>
+                <p>Chat with our AI assistant to get answers about your health, scans, and medical questions.</p>
+            </div>
+            
+            <div class="chat-container">
+                <div class="chat-sidebar">
+                    <div class="chat-options">
+                        <h3>Options</h3>
+                        <div class="option-item">
+                            <label>Chat Mode</label>
+                            <select class="chat-mode-select">
+                                <option value="general">General Medical Questions</option>
+                                <option value="scan">Scan Interpretation Help</option>
+                                <option value="symptoms">Symptom Assessment</option>
+                                <option value="medication">Medication Information</option>
+                            </select>
+                        </div>
+                        
+                        <div class="option-item">
+                            <label>Link Medical Records</label>
+                            <div class="toggle-switch">
+                                <input type="checkbox" id="link-records" checked>
+                                <label for="link-records"></label>
+                                <span>AI has access to your records</span>
+                            </div>
+                        </div>
+                        
+                        <div class="option-item">
+                            <label>Share with Doctor</label>
+                            <div class="toggle-switch">
+                                <input type="checkbox" id="share-doctor">
+                                <label for="share-doctor"></label>
+                                <span>Conversations not shared</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="chat-history">
+                        <h3>Recent Conversations</h3>
+                        <div class="history-list" id="history-list">
+                            <div class="history-item active">
+                                <div class="history-icon">
+                                    <i class="fas fa-comment-medical"></i>
+                                </div>
+                                <div class="history-info">
+                                    <h4>Tumor Questions</h4>
+                                    <p>Today, 10:15 AM</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button class="new-chat-btn">
+                            <i class="fas fa-plus"></i> New Conversation
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="chat-main">
+                    <div class="chat-messages" id="chat-messages-container">
+                        <div class="chat-date">Today</div>                  
+                    </div>
+                    
+                    <div class="chat-input">
+                        <div class="input-attachments">
+                            <button class="attachment-btn" title="Attach Image">
+                                <i class="fas fa-image"></i>
+                            </button>
+                            <button class="attachment-btn" title="Attach Document">
+                                <i class="fas fa-file-medical"></i>
+                            </button>
+                            <button class="attachment-btn" title="Record Audio">
+                                <i class="fas fa-microphone"></i>
+                            </button>
+                            <button class="attachment-btn show-info-btn" title="Show Information">
+                                <i class="fas fa-info-circle"></i>
+                            </button>
+                        </div>
+                        <textarea class="chat-textarea" placeholder="Type your message here..." id="chat-input"></textarea>
+                        <button class="send-btn" id="send-btn">
+                            <i class="fas fa-paper-plane" id="sending-loading-icon"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="chat-info">
+                    <div class="info-header">
+                        <h3>AI Assistant Information</h3>
+                        <button class="close-info-btn"><i class="fas fa-times"></i></button>
+                    </div>
+                    
+                    <div class="info-content">
+                        <div class=".info-section-app">
+                            <h4>About This Assistant</h4>
+                            <p>Our AI Medical Assistant is powered by advanced large language models trained on medical literature, clinical guidelines, and research papers. It can provide educational information about conditions, help interpret medical terminology, and offer general guidance.</p>
+                        </div>
+                        
+                        <div class=".info-section-app">
+                            <h4>Limitations</h4>
+                            <ul>
+                                <li>This AI cannot provide definitive diagnoses</li>
+                                <li>Information provided is for educational purposes only</li>
+                                <li>Not a substitute for professional medical advice</li>
+                                <li>May not be aware of your complete medical history</li>
+                                <li>In case of emergency, contact emergency services immediately</li>
+                            </ul>
+                        </div>
+                        
+                        <div class=".info-section-app">
+                            <h4>Data & Privacy</h4>
+                            <p>Your conversations are encrypted and stored securely. You can choose to share conversations with your healthcare provider or delete them at any time.</p>
+                            <button class="btn-small">View Privacy Policy</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>BrainScan AI</h3>
+                <p>Advanced brain tumor detection powered by deep learning and artificial intelligence.</p>
+                <div class="social-icons">
+                    <a href="https://x.com/"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.linkedin.com/"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://github.com/shahriar-hd/brainapp"><i class="fab fa-github"></i></a>
+                    <a href="https://t.me"><i class="fab fa-telegram"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="{{ url_for('index') }}">Home</a></li>
+                    <li><a href="{{ url_for('index', _anchor='mri-section') }}">Technology</a></li>
+                    <li><a href="{{ url_for('index', _anchor='pricing') }}">Pricing</a></li>
+                    <li><a href="{{ url_for('about') }}">About Us</a></li>
+                    <li><a href="{{ url_for('contact') }}">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="{{ url_for('resources') }}">Documentation</a></li>
+                    <li><a href="{{ url_for('resources', _anchor='api-reference') }}">API Reference</a></li>
+                    <li><a href="{{ url_for('resources', _anchor='research-papers') }}">Research Papers</a></li>
+                    <li><a href="{{ url_for('resources', _anchor='privacy-policy') }}">Privacy Policy</a></li>
+                    <li><a href="{{ url_for('resources', _anchor='terms-of-service') }}">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact Us</h3>
+                <ul class="contact-info">
+                    <li><i class="fas fa-envelope"></i><a href="mailto:csa@kut.ac.ir">csa@kut.ac.ir</a></li>
+                    <li><i class="fas fa-phone"></i> +98 (083) 3830-5001</li>
+                    <li><i class="fas fa-map-marker-alt"></i>Kermanshah University of Technology, Imam Khomaini highway, Kermanshah, Iran</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 BrainScan AI. All rights reserved.</p>
+        </div>
+    </footer>
+
+    
+    <!-- JavaScript for App functionality -->
+     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script
+        type="text/javascript" 
+        src="{{ url_for('static', filename='js/app.js') }}">
+    </script> -->
+</body>
+</html> 

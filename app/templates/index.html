@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BrainScan AI - Advanced Brain Tumor Detection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/countup.js@2.0.7/dist/countUp.min.js"></script>
+</head>
+<body class="light-theme">
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo">
+            <img src="{{ url_for('static', filename='image/pic/Logo.png') }}" alt="BrainScan Logo">
+            <span>BrainScan AI</span>
+        </div>
+        <div class="nav-links">
+            <a href="{{ url_for('index') }}" class="active">Home</a>
+            <a href="{{ url_for('index', _anchor='mri-section') }}">Technology</a>
+            <a href="{{ url_for('resources') }}">References</a>
+            <a href="{{ url_for('about') }}">About</a>
+            <a href="{{ url_for('contact') }}">Contact</a>
+            <a href="{{ url_for('app_page') }}">Demo</a>
+        </div>
+        <div class="nav-buttons">
+            <button id="theme-toggle">
+                <i class="fas fa-moon"></i>
+            </button>
+            <a href="{{ url_for('login') }}"><button class="login-btn">Login</button></a>
+            <a href="{{ url_for('login', _anchor='signup') }}"><button class="signup-btn">Sign Up</button></a>
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Advanced Brain Tumor Detection Using AI</h1>
+            <p>Our cutting-edge deep learning models revolutionize the way brain tumors are detected, segmented, and analyzed using MRI scans. Powered by UNet, ResNeXt50, and Feature Pyramid Networks, our solution achieves high accuracy while providing AI-assisted treatment recommendations with our integrated LLM system.</p>
+            <a href="{{ url_for('app_page') }}"><button class="try-demo-btn">Try Demo</button></a>
+        </div>
+        <div class="hero-image">
+            <img src="{{ url_for('static', filename='image/pic/output-onlinegiftools.gif') }}" alt="Brain AI Visualization">
+        </div>
+    </section>
+
+    <!-- Info Section -->
+    <section id="info" class="info-section">
+        <h2>Advancing Healthcare Through AI</h2>
+        <div class="info-cards">
+            <div class="info-card">
+                <div class="card-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <h3>Our Advanced Models</h3>
+                <p>We utilize three powerful deep learning architectures: Vanilla UNet, UNet with ResNeXt50 backbone, and Feature Pyramid Network for precise tumor segmentation with over 95% accuracy.</p>
+            </div>
+            <div class="info-card">
+                <div class="card-icon">
+                    <i class="fas fa-project-diagram"></i>
+                </div>
+                <h3>Research & Development</h3>
+                <p>Our team continuously improves our models through rigorous research, experimentation, and validation using diverse datasets to ensure robustness and generalizability.</p>
+            </div>
+            <div class="info-card">
+                <div class="card-icon">
+                    <i class="fas fa-globe-americas"></i>
+                </div>
+                <h3>Global Impact</h3>
+                <p>Brain tumors affect millions globally, with over 300,000 new cases diagnosed annually. Early detection is critical for improving treatment outcomes and patient survival rates.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- MRI Section -->
+    <section id="mri-section" class="mri-section">
+        <div class="mri-image">
+            <img src="{{ url_for('static', filename='image/pic/output.png') }}" alt="MRI Brain Scan">
+        </div>
+        <div class="mri-content">
+            <h2>MRI Analysis & Segmentation</h2>
+            <p>Magnetic Resonance Imaging (MRI) provides detailed images of the brain's soft tissues, making it the gold standard for brain tumor detection. Our AI system works by:</p>
+            <ul>
+                <li>Processing raw MRI scans from standard DICOM formats</li>
+                <li>Pre-processing images to enhance feature visibility</li>
+                <li>applying our ensemble of deep learning models for tumor segmentation</li>
+                <li>Generating precise tumor masks that highlight location, size, and boundaries</li>
+                <li>Leveraging our LLM to provide interpretable insights and treatment suggestions</li>
+            </ul>
+            <p>The result is a comprehensive analysis that helps physicians make better-informed decisions in seconds rather than hours.</p>
+        </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section id="why-choose" class="why-choose">
+        <h2>Why Choose Our Solution</h2>
+        <div class="tabs">
+            <button class="tab-btn active" data-target="benefits">All Benefits</button>
+            <button class="tab-btn" data-target="accuracy">High Accuracy</button>
+            <button class="tab-btn" data-target="security">Data Security</button>
+            <button class="tab-btn" data-target="integration">Easy Integration</button>
+        </div>
+        <div class="tab-content">
+            <div class="tab-pane active" id="benefits">
+                <div class="benefit-card">
+                    <h3>Comprehensive Solution</h3>
+                    <p>Our platform combines state-of-the-art segmentation with interpretable AI, offering not just detection but also insights into treatment options.</p>
+                </div>
+                <div class="benefit-card">
+                    <h3>Time Efficiency</h3>
+                    <p>Reduce analysis time from hours to seconds, allowing for faster diagnosis and treatment planning.</p>
+                </div>
+                <div class="benefit-card">
+                    <h3>Enhanced Accessibility</h3>
+                    <p>Cloud-based solution accessible anywhere, enabling remote consultations and second opinions.</p>
+                </div>
+                <div class="benefit-card">
+                    <h3>Continuous Improvement</h3>
+                    <p>Our models learn and improve with more data, continuously enhancing detection capabilities.</p>
+                </div>
+            </div>
+            <div class="tab-pane" id="accuracy">
+                <div class="benefit-card">
+                    <h3>95%+ Segmentation Accuracy</h3>
+                    <p>Our ensemble approach achieves over 95% accuracy in tumor boundary delineation, outperforming many manual segmentations.</p>
+                </div>
+                <div class="benefit-card">
+                    <h3>Validated Results</h3>
+                    <p>Tested against multiple public and private datasets including BraTS challenge benchmarks.</p>
+                </div>
+                <div class="benefit-card">
+                    <h3>Reduced False Positives</h3>
+                    <p>Advanced filtering techniques minimize false positive rates to under 2%, reducing unnecessary follow-up procedures.</p>
+                </div>
+            </div>
+            <div class="tab-pane" id="security">
+                <div class="benefit-card">
+                    <h3>HIPAA Compliant</h3>
+                    <p>Our platform adheres to strict healthcare data protection standards, ensuring patient confidentiality.</p>
+                </div>
+                <div class="benefit-card">
+                    <h3>End-to-End Encryption</h3>
+                    <p>All data transmission and storage utilize industry-standard encryption protocols.</p>
+                </div>
+                <div class="benefit-card">
+                    <h3>Data Sovereignty</h3>
+                    <p>Options for on-premise deployment to maintain complete control over sensitive patient data.</p>
+                </div>
+            </div>
+            <div class="tab-pane" id="integration">
+                <div class="benefit-card">
+                    <h3>PACS Integration</h3>
+                    <p>Seamlessly connects with existing Picture Archiving and Communication Systems used in hospitals.</p>
+                </div>
+                <div class="benefit-card">
+                    <h3>API Access</h3>
+                    <p>Comprehensive API allows integration with hospital management systems and electronic health records.</p>
+                </div>
+                <div class="benefit-card">
+                    <h3>Minimal Training Required</h3>
+                    <p>Intuitive interface designed for healthcare professionals with minimal technical knowledge.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Impact Section -->
+    <section id="impact" class="impact-section">
+        <h2>Our Impact</h2>
+        <div class="impact-metrics">
+            <div class="metric">
+                <div class="metric-value" id="accuracy-metric">92</div>
+                <div class="metric-label">% Accuracy</div>
+            </div>
+            <div class="metric">
+                <div class="metric-value" id="patients-metric">1000+</div>
+                <div class="metric-label">Patients Helped</div>
+            </div>
+            <div class="metric">
+                <div class="metric-value" id="hospitals-metric">10+</div>
+                <div class="metric-label">Hospital Partners</div>
+            </div>
+            <div class="metric">
+                <div class="metric-value" id="users-metric">200+</div>
+                <div class="metric-label">Active Users</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="pricing-section">
+        <h2>Choose Your Plan</h2>
+        <div class="pricing-cards">
+            <div class="pricing-card">
+                <div class="card-header">
+                    <h3>Basic</h3>
+                    <p class="price">$29<span>/month</span></p>
+                </div>
+                <div class="card-body">
+                    <p class="card-description">For patients seeking preliminary insights</p>
+                    <ul>
+                        <li><i class="fas fa-check"></i> Basic tumor detection</li>
+                        <li><i class="fas fa-check"></i> Limited scans per month (5)</li>
+                        <li><i class="fas fa-check"></i> General information chatbot</li>
+                        <li><i class="fas fa-check"></i> Community support</li>
+                        <li><i class="fas fa-times"></i> No detailed analysis</li>
+                        <li><i class="fas fa-times"></i> No treatment recommendations</li>
+                    </ul>
+                </div>
+                <div class="card-footer">
+                    <button class="select-plan-btn" value="basic">Select Plan</button>
+                </div>
+            </div>
+            <div class="pricing-card featured">
+                <div class="card-header">
+                    <h3>Professional</h3>
+                    <p class="price">$49<span>/month</span></p>
+                </div>
+                <div class="card-body">
+                    <p class="card-description">For medical professionals</p>
+                    <ul>
+                        <li><i class="fas fa-check"></i> Advanced tumor segmentation</li>
+                        <li><i class="fas fa-check"></i> Unlimited scans</li>
+                        <li><i class="fas fa-check"></i> Detailed LLM analysis</li>
+                        <li><i class="fas fa-check"></i> Treatment suggestions</li>
+                        <li><i class="fas fa-check"></i> Priority support</li>
+                        <li><i class="fas fa-check"></i> Patient management dashboard</li>
+                    </ul>
+                </div>
+                <div class="card-footer">
+                    <button class="select-plan-btn" value="professional">Select Plan</button>
+                </div>
+            </div>
+            <div class="pricing-card">
+                <div class="card-header">
+                    <h3>Enterprise</h3>
+                    <p class="price">$199<span>/month</span></p>
+                </div>
+                <div class="card-body">
+                    <p class="card-description">For healthcare organizations</p>
+                    <ul>
+                        <li><i class="fas fa-check"></i> Complete solution</li>
+                        <li><i class="fas fa-check"></i> Multi-user access</li>
+                        <li><i class="fas fa-check"></i> PACS/EMR integration</li>
+                        <li><i class="fas fa-check"></i> On-premise option</li>
+                        <li><i class="fas fa-check"></i> Custom model training</li>
+                        <li><i class="fas fa-check"></i> Dedicated account manager</li>
+                    </ul>
+                </div>
+                <div class="card-footer">
+                    <button class="select-plan-btn" value="enterprise">Select Plan</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials-section">
+        <h2>What Our Users Say</h2>
+        <div class="testimonial-carousel">
+            <div class="testimonial-container">
+                <div class="testimonial active">
+                    <div class="testimonial-content">
+                        <p>"The accuracy of tumor detection and the LLM's ability to suggest relevant treatment options has transformed our diagnostic workflow. We've reduced our diagnostic time by 60%."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="{{ url_for('static', filename='image/doctor/6.png') }}" alt="Dr. Sarah Chen">
+                        <div>
+                            <h4>Dr. Sarah Chen</h4>
+                            <p>Neurosurgeon, Memorial Hospital</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial">
+                    <div class="testimonial-content">
+                        <p>"As a patient, having access to AI-powered preliminary analysis gave me peace of mind while waiting for my specialist appointment. The interface is incredibly user-friendly."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="{{ url_for('static', filename='image/patient/5.jpg') }}" alt="James Wilson">
+                        <div>
+                            <h4>Chang Houng</h4>
+                            <p>Patient</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial">
+                    <div class="testimonial-content">
+                        <p>"Implementing BrainScan AI across our network of 5 hospitals has standardized our brain tumor diagnostics and improved our treatment planning process significantly."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="{{ url_for('static', filename='image/doctor/4.png') }}" alt="Dr. Michael Rodriguez">
+                        <div>
+                            <h4>Dr. Michael Rodriguez</h4>
+                            <p>Chief of Radiology, Metropolitan Healthcare</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-controls">
+                <button id="prev-testimonial"><i class="fas fa-chevron-left"></i></button>
+                <div class="testimonial-dots">
+                    <span class="dot active"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
+                <button id="next-testimonial"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Support Section -->
+    <section id="support" class="support-section">
+        <h2>Support Our Project</h2>
+        <div class="support-content">
+            <p>By partnering with us, you're contributing to the advancement of medical AI technology that saves lives. Your support enables us to:</p>
+            <ul>
+                <li>Expand our research into new tumor types and treatment options</li>
+                <li>Provide access to underserved communities and regions</li>
+                <li>Improve our models with more diverse training data</li>
+                <li>Develop new features based on clinical feedback</li>
+            </ul>
+            <p>Whether you're a healthcare provider, research institution, or technology partner, we welcome your collaboration in our mission to revolutionize brain tumor detection and treatment.</p>
+            <button class="partner-btn" id="partner-btn">Become a Partner</button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>BrainScan AI</h3>
+                <p>Advanced brain tumor detection powered by deep learning and artificial intelligence.</p>
+                <div class="social-icons">
+                    <a href="https://x.com/"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.linkedin.com/"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://github.com/shahriar-hd/brain'app_page'"><i class="fab fa-github"></i></a>
+                    <a href="https://t.me"><i class="fab fa-telegram"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="{{ url_for('index') }}">Home</a></li>
+                    <li><a href="{{ url_for('index', _anchor='mri-section') }}">Technology</a></li>
+                    <li><a href="{{ url_for('index', _anchor='pricing') }}">Pricing</a></li>
+                    <li><a href="{{ url_for('about') }}">About Us</a></li>
+                    <li><a href="{{ url_for('contact') }}">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="{{ url_for('resources') }}">Documentation</a></li>
+                    <li><a href="{{ url_for('resources', _anchor='api-reference') }}">API Reference</a></li>
+                    <li><a href="{{ url_for('resources', _anchor='research-papers') }}">Research Papers</a></li>
+                    <li><a href="{{ url_for('resources', _anchor='privacy-policy') }}">Privacy Policy</a></li>
+                    <li><a href="{{ url_for('resources', _anchor='terms-of-service') }}">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact Us</h3>
+                <ul class="contact-info">
+                    <li><i class="fas fa-envelope"></i><a href="mailto:csa@kut.ac.ir">csa@kut.ac.ir</a></li>
+                    <li><i class="fas fa-phone"></i> +98 (083) 3830-5001</li>
+                    <li><i class="fas fa-map-marker-alt"></i>Kermanshah University of Technology, Imam Khomaini highway, Kermanshah, Iran</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 BrainScan AI. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script 
+        type="text/javascript" 
+        src="{{ url_for('static', filename='js/script.js') }}"
+    ></script>
+</body>
+</html>
