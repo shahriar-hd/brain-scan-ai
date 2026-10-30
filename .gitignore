@@ -1,0 +1,11 @@
+# Generated model exports (regenerate with scripts/export_model.py)
+exports/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# OS
+.DS_Store

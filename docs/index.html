@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Brain Scan AI — YOLO11 Brain Tumor Segmentation Demo</title>
+  <meta name="description" content="Client-side brain tumor segmentation demo running a YOLO11m-seg ONNX model entirely in your browser." />
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/onnxruntime-web@1.22.0/dist/ort.min.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <h1>Brain Scan AI</h1>
+      <p class="subtitle">YOLO11m-seg brain tumor segmentation — runs entirely in your browser</p>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="disclaimer" role="note">
+      <strong>Research prototype.</strong> This is not a medical device and does not provide medical advice.
+      Always consult a qualified clinician for diagnosis and treatment.
+    </section>
+
+    <section class="panel">
+      <div class="panel-head">
+        <h2>1. Load an MRI slice</h2>
+        <span id="model-status" class="badge">Not loaded</span>
+      </div>
+
+      <div class="model-source">
+        <label for="model-source">Model source</label>
+        <select id="model-source">
+          <option value="hf">Hugging Face (default, ~85 MB)</option>
+          <option value="file">Local .onnx file</option>
+        </select>
+        <button id="load-model-btn" class="ghost" type="button">Load model</button>
+        <input id="model-input" type="file" accept=".onnx,application/octet-stream" hidden />
+        <span id="model-source-label" class="muted"></span>
+      </div>
+
+      <div id="dropzone" class="dropzone" tabindex="0">
+        <input id="file-input" type="file" accept="image/png,image/jpeg,image/webp,image/bmp" hidden />
+        <p><strong>Drop an image here</strong> or <button id="browse-btn" class="linkbtn" type="button">browse</button></p>
+        <p class="muted">PNG / JPG / WebP. Inference is local; nothing is uploaded.</p>
+      </div>
+
+      <div class="samples">
+        <span class="muted">Try a sample:</span>
+        <button class="sample-btn" data-src="samples/tumor-mri.png">
+          <img src="samples/tumor-mri.png" alt="Sample tumor MRI" /> Tumor example
+        </button>
+        <button class="sample-btn" data-src="samples/scan.png">
+          <img src="samples/scan.png" alt="Sample MRI scan" /> No-tumor example
+        </button>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head">
+        <h2>2. Segment</h2>
+        <div class="controls">
+          <label for="conf">Confidence <output id="conf-value">0.50</output></label>
+          <input id="conf" type="range" min="0.10" max="0.90" step="0.05" value="0.50" />
+          <button id="run-btn" class="primary" disabled>Run segmentation</button>
+        </div>
+      </div>
+      <div id="status" class="muted">Choose a model source above and press “Load model”, then run a scan.</div>
+    </section>
+
+    <section class="panel result-panel">
+      <div class="panel-head">
+        <h2>3. Result</h2>
+        <button id="download-btn" class="ghost" disabled>Download overlay</button>
+      </div>
+      <div class="canvas-wrap">
+        <canvas id="canvas" width="512" height="512"></canvas>
+        <div id="placeholder" class="placeholder">Your annotated scan will appear here</div>
+      </div>
+      <div id="results" class="results"></div>
+    </section>
+
+    <section class="panel info">
+      <h2>About this demo</h2>
+      <p>
+        This static page performs inference with <a href="https://onnxruntime.ai/docs/tutorials/web/" target="_blank" rel="noopener">ONNX Runtime Web</a>
+        using the <code>yolov11-seg-brain.onnx</code> model published on
+        <a href="https://huggingface.co/shahriarhd/brain-scan-ai-yolov11-seg" target="_blank" rel="noopener">Hugging Face</a>.
+        The image is letterboxed to <code>256×256</code>, passed through the network, then boxes and instance masks are rendered on the canvas.
+      </p>
+      <p>
+        Model repository: <a href="https://huggingface.co/shahriarhd/brain-scan-ai-yolov11-seg" target="_blank" rel="noopener">shahriarhd/brain-scan-ai-yolov11-seg</a> ·
+        Project: <a href="https://github.com/shahriar-hd/brain-scan-ai" target="_blank" rel="noopener">GitHub</a>
+      </p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>Built for research and education. Not for clinical use. · Model license: AGPL-3.0</p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

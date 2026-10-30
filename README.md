@@ -17,6 +17,16 @@ This web application serves as a digital medical assistant for brain tumor patie
 - **YOLO (You Only Look Once)**: Custom-trained model for brain tumor detection and segmentation
 - **MedGemma**: Medical language model for intelligent chat assistance and medical text generation
 
+## 🧠 Pre-trained Model & Browser Demo
+
+The custom `YOLO11m-seg` brain tumor segmentation model is published on Hugging Face together with its training results:
+
+- **Model repository**: <https://huggingface.co/shahriarhd/brain-scan-ai-yolov11-seg>
+- **Formats**: original `.pt`, `safetensors`, and `ONNX` (opset 12, 256×256 input)
+- **Browser demo (GitHub Pages)**: <https://shahriar-hd.github.io/brain-scan-ai/>
+
+The demo is a standalone page under [`docs/`](docs/) that runs the ONNX model **fully client-side** with ONNX Runtime Web — no server, no uploads. See [`docs/README`](docs/) and the model card for details. The conversion/upload scripts live in [`scripts/`](scripts/).
+
 ## 📸 Application Screenshots
 
 ### Main Dashboard
