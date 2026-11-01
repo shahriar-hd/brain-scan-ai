@@ -464,9 +464,51 @@
     if (state.session) runInference();
   }
 
-  function handleFile(file) {
-    if (!file || !file.type.startsWith("image/")) {
-      setStatus("Please choose an image file (PNG, JPG or WebP).", "error");
+  function isTiffFile(file) {
+    return file.type === "image/tiff" || /\.tiff?$/i.test(file.name || "");
+  }
+
+  async function decodeTiffToDataUrl(file) {
+    if (typeof UTIF === "undefined") {
+      throw new Error("TIFF decoder not loaded");
+    }
+    const buffer = await file.arrayBuffer();
+    const ifds = UTIF.decode(buffer);
+    if (!ifds || !ifds.length) {
+      throw new Error("no image found in the TIFF file");
+    }
+    UTIF.decodeImage(buffer, ifds[0]);
+    const rgba = UTIF.toRGBA8(ifds[0]);
+    const width = ifds[0].width;
+    const height = ifds[0].height;
+
+    const canvas = document.createElement("canvas");
+    canvas.width = width;
+    canvas.height = height;
+    const ctx = canvas.getContext("2d");
+    const imageData = ctx.createImageData(width, height);
+    imageData.data.set(rgba);
+    ctx.putImageData(imageData, 0, 0);
+    return canvas.toDataURL("image/png");
+  }
+
+  async function handleFile(file) {
+    if (!file) return;
+
+    if (isTiffFile(file)) {
+      setStatus("Decoding TIFF image…", "busy");
+      try {
+        const dataUrl = await decodeTiffToDataUrl(file);
+        await loadImageFromSrc(dataUrl);
+        setStatus("TIFF decoded. Running segmentation…");
+      } catch (error) {
+        setStatus(`Could not decode the TIFF file: ${error.message}`, "error");
+      }
+      return;
+    }
+
+    if (!file.type.startsWith("image/")) {
+      setStatus("Unsupported file. Use PNG, JPG, WebP, BMP or TIFF.", "error");
       return;
     }
     const url = URL.createObjectURL(file);

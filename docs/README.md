@@ -16,6 +16,11 @@ draws the predicted boxes and instance masks. Nothing is uploaded to a server.
 | `app.js` | Preprocessing, inference, YOLO post-processing (NMS + mask decoding), rendering |
 | `samples/` | Sample MRI slices |
 
+## Supported image formats
+
+PNG, JPG/JPEG, WebP, BMP, and TIFF (`.tif` / `.tiff`). TIFF slices are decoded in the
+browser with [UTIF.js](https://github.com/photopea/UTIF.js), so no server is involved.
+
 ## Run locally
 
 Because the demo fetches the model over HTTPS, serve the folder with any static server:
